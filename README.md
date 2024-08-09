@@ -1,4 +1,4 @@
-# Bot Discord.js pour serveurs de boost BS
+# Bot Discord.js pour Zenoxx
 
 
 ## Présentation du bot 
@@ -14,6 +14,15 @@
 - afficher les stats des joeurs
 - vérification des nombres pour le 'actual_rank-input'
 - mettre en vente son compte
+
+**TICKETS**: <br>
+- rank35
+- rank30
+- ranked
+- trophy boost
+- middleman
+- 1v1 for money
+
 
 
 ## Installation
