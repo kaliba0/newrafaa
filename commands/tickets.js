@@ -40,35 +40,69 @@ client.on('interactionCreate', async interaction => {
                 return;
             }
 
+            if (!interaction.member.roles.cache.has(adminRoleId)) {
+                await interaction.reply({ content: 'You do not have the required permissions to use this command.', ephemeral: true });
+                return;
+            }
+
             const embed = new EmbedBuilder()
                 .setColor(0xFFBB00)
                 .setTitle('Interested in our services?')
                 .setDescription('To create a ticket, choose what you are interested in!')
-                .setThumbnail('https://logos-world.net/wp-content/uploads/2021/08/Brawl-Stars-Emblem.png');
+                .setThumbnail('https://logos-world.net/wp-content/uploads/2021/08/Brawl-Stars-Emblem.png')
+                .setFooter({ text: 'Zenox Shop Service <3' });
 
             const selectMenu = new StringSelectMenuBuilder()
                 .setCustomId('select-service')
                 .setPlaceholder('Select an option')
                 .addOptions([
                     {
-                        label: 'Get a brawler boosted to rank 30',
+                        label: 'Rank 30',
+                        description: 'Get a brawler boosted to rank 30',
                         value: 'rank30',
                         emoji: '1268684339408011365',
                     },
                     {
-                        label: 'Get a brawler boosted to rank 35',
+                        label: 'rank 35',
+                        description: 'Get a brawler boosted to rank 35',
                         value: 'rank35',
                         emoji: '1268684199154421891',
                     },
                     {
-                        label: 'Get a Legendary rank',
-                        emoji: '1261680637501509632',
-                        value: 'rank_legendary',
+                        label: 'Ranked',
+                        description:'Upgrade your rank',
+                        emoji: '1270087474512793631',
+                        value: 'ranked',
                     },
                     {
-                        label: 'Get a Master rank',
-                        emoji: '1268683177174765639',
-                        value: 'rank_masters',
+                        label: 'Trophy Boost',
+                        description: 'Increase your trophy number',
+                        emoji: '1270087684584640606',
+                        value: 'trophy_boost',
+                    },
+                    {
+                        label: 'Adds',
+                        description: 'Buy an add',
+                        emoji: '➕',
+                        value: 'add',
+                    },
+                    {
+                        label: 'MiddleMan (MM)',
+                        description: 'If you need a MiddleMan',
+                        emoji: '👥',
+                        value: 'middleman',
+                    },
+                    {
+                        label: '1V1 for Money',
+                        description: 'Play a 1v1 and earn more money',
+                        emoji: '💸',
+                        value: '1v1_money',
+                    },
+                    {
+                        label: 'Other',
+                        description: 'If you have any other question',
+                        emoji: '❓',
+                        value: 'other',
                     }
                 ]);
 
@@ -106,24 +140,36 @@ client.on('interactionCreate', async interaction => {
 
             if (interaction.values && interaction.values.length > 0) {
                 if (interaction.values[0] === 'rank30') {
-                    response = 'rank 30';
+                    response = 'rank30';
                     service = 'Boost to rank 30';
                     console.log(interaction.user.username, response);
                 } else if (interaction.values[0] === 'rank35') {
-                    response = 'rank 35';
+                    response = 'rank35';
                     service = 'Boost to rank 35';
                     console.log(interaction.user.username, response);
-                } else if (interaction.values[0] === 'rank_legendary') {
-                    response = 'legendary_rank';
-                    service = 'Boost to Legendary rank';
+                } else if (interaction.values[0] === 'ranked') {
+                    response = 'ranked';
+                    service = 'Ranked Boost';
                     console.log(interaction.user.username, response);
-                } else if (interaction.values[0] === 'rank_masters') {
-                    response = 'master_rank';
+                } else if (interaction.values[0] === 'trophy_boost') {
+                    response = 'trophy_boost';
                     service = 'Boost to Master rank';
+                    console.log(interaction.user.username, response)
+                } else if (interaction.values[0] === 'add') {
+                    response = 'add';
+                    service = 'Add a player';
+                    console.log(interaction.user.username, response)
+                } else if (interaction.values[0] === 'middleman') {
+                    response = 'middleman';
+                    service = 'MiddleMan';
+                    console.log(interaction.user.username, response)
+                } else if (interaction.values[0] === '1v1_money') {
+                    response = '1v1_money';
+                    service = 'Play a 1v1';
                     console.log(interaction.user.username, response)
                 }
 
-                if (response === 'rank 30' || response === 'rank 35') {
+                if (response === 'rank30' || response === 'rank35') {
                     const modal = new ModalBuilder()
                         .setCustomId('brawler-modal')
                         .setTitle('Brawler Boost Information');
