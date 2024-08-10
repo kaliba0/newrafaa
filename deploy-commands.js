@@ -45,10 +45,6 @@ const commands = [
     {
         name: 'clear',
         description: 'Clear all messages in the channel',
-    },
-    {
-        name: 'add',
-        description: 'Add some players to help you in the game',
     }
 ];
 
