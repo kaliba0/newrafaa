@@ -2,7 +2,7 @@ const { ModalBuilder, TextInputBuilder, ActionRowBuilder, TextInputStyle, EmbedB
 const ticketscatId = process.env.TICKETS_CAT_ID;
 const adminRoleId = process.env.ADMIN_ROLE_ID;
 
-async function Rank35_fx(interaction) {
+async function Rank35_fx(interaction, ticketNumber) {
     const modal = new ModalBuilder()
         .setCustomId('brawler-modal')
         .setTitle('Brawler Boost Information');
@@ -47,7 +47,7 @@ async function Rank35_fx(interaction) {
 
         const guild = interaction.guild;
         const ticketChannel = await guild.channels.create({
-            name: `ticket-rank35-${interaction.user.username}`,
+            name: `ticket-${ticketNumber}`,
             type: ChannelType.GuildText,
             parent: ticketscatId,
             permissionOverwrites: [

@@ -2,7 +2,7 @@ const { ModalBuilder, TextInputBuilder, ActionRowBuilder, TextInputStyle, EmbedB
 const ticketscatId = process.env.TICKETS_CAT_ID;
 const adminRoleId = process.env.ADMIN_ROLE_ID;
 
-async function TrophyBoost_fx(interaction) {
+async function TrophyBoost_fx(interaction, ticketNumber) {
     const modal = new ModalBuilder()
         .setCustomId('trophy-boost-modal')
         .setTitle('Trophy Boost Information');
@@ -40,7 +40,7 @@ async function TrophyBoost_fx(interaction) {
 
         const guild = interaction.guild;
         const ticketChannel = await guild.channels.create({
-            name: `ticket-trophyboost-${interaction.user.username}`,
+            name: `ticket-${ticketNumber}`,
             type: ChannelType.GuildText,
             parent: ticketscatId,
             permissionOverwrites: [

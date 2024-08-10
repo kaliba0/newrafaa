@@ -2,7 +2,7 @@ const { ModalBuilder, TextInputBuilder, ActionRowBuilder, TextInputStyle, EmbedB
 const ticketscatId = process.env.TICKETS_CAT_ID;
 const adminRoleId = process.env.ADMIN_ROLE_ID;
 
-async function Ranked_fx(interaction) {
+async function Ranked_fx(interaction, ticketNumber) {
     const modal = new ModalBuilder()
         .setCustomId('ranked-modal')
         .setTitle('Rank Boost Information');
@@ -40,7 +40,7 @@ async function Ranked_fx(interaction) {
 
         const guild = interaction.guild;
         const ticketChannel = await guild.channels.create({
-            name: `ticket-ranked-${interaction.user.username}`,
+            name: `ticket-${ticketNumber}`,
             type: ChannelType.GuildText,
             parent: ticketscatId,
             permissionOverwrites: [

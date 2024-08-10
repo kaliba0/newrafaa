@@ -31,6 +31,8 @@ const client = new Client({
     ]
 });
 
+let ticketNumber = 1; 
+
 client.once('ready', () => {
     console.log('/tickets is available!');
 });
@@ -135,38 +137,38 @@ client.on('interactionCreate', async interaction => {
                 await interaction.reply({ content: 'There was an error trying to close this ticket.', ephemeral: true });
             }
         }
-        
+
     } else if (interaction.isStringSelectMenu()) {
         if (interaction.customId === 'select-service') {
 
             if (interaction.values && interaction.values.length > 0) {
                 switch (interaction.values[0]) {
                     case 'rank30':
-                        Rank30_fx(interaction);
+                        Rank30_fx(interaction, ticketNumber++);
                         break;
                     case 'rank35':
-                        Rank35_fx(interaction);
+                        Rank35_fx(interaction, ticketNumber++);
                         break;
                     case 'ranked':
-                        Ranked_fx(interaction);
+                        Ranked_fx(interaction, ticketNumber++);
                         break;
                     case 'trophy_boost':
-                        TrophyBoost_fx(interaction);
+                        TrophyBoost_fx(interaction, ticketNumber++);
                         break;
                     case 'add':
-                        // Add_fx(interaction);
+                        // Add_fx(interaction, ticketNumber++);
                         console.log('add')
                         break;
                     case 'middleman':
-                        // MiddleMan_fx(interaction);
+                        // MiddleMan_fx(interaction, ticketNumber++);
                         console.log('middleman')
                         break;
                     case '1v1_money':
-                        // Money1V1_fx(interaction);
+                        // Money1V1_fx(interaction, ticketNumber++);
                         console.log('1v1 money')
                         break;
                     default:
-                        // Other_fx(interaction);
+                        // Other_fx(interaction, ticketNumber++);
                         console.log('other')
                         break;
                 }
