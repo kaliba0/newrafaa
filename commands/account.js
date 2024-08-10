@@ -129,7 +129,7 @@ client.on('interactionCreate', async interaction => {
 
             const button = new ButtonBuilder()
                 .setCustomId('buyButton')
-                .setLabel('Acheter')
+                .setLabel('🛒 Buy this account')
                 .setStyle(ButtonStyle.Success);
 
             const row = new ActionRowBuilder().addComponents(button);

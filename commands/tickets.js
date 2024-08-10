@@ -9,7 +9,7 @@ const { TrophyBoost_fx } = require('./fonctions/tickets/trophyBoost');
 // const { Add_fx } = require('./fonctions/tickets/add');
 // const { MiddleMan_fx } = require('./fonctions/tickets/middleman');
 // const { Money1V1_fx } = require('./fonctions/tickets/1v1money');
-// const { Other_fx } = require('./fonctions/tickets/other');
+const { Other_fx } = require('./fonctions/tickets/other');
 
 // Modifications pour le .env
 const token = process.env.TOKEN;
@@ -168,7 +168,7 @@ client.on('interactionCreate', async interaction => {
                         console.log('1v1 money')
                         break;
                     default:
-                        // Other_fx(interaction, ticketNumber++);
+                        Other_fx(interaction, ticketNumber++);
                         console.log('other')
                         break;
                 }

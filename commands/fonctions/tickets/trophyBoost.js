@@ -79,7 +79,7 @@ async function TrophyBoost_fx(interaction, ticketNumber) {
             .setFooter({ 
                 text: `Ticket opened by ${interaction.user.username} on ${new Date().toLocaleString()}` 
             });
-            
+
         await ticketChannel.send({ embeds: [recapEmbed] });
 
         const paypalEmbed = new EmbedBuilder()
@@ -89,7 +89,7 @@ async function TrophyBoost_fx(interaction, ticketNumber) {
             .addFields(
                 {name: '\u200B', value:'Please send the needed amount with Paypal to this email adress : _____@gmail.com.'},
                 {name: 'YOU MUST SEND IT THROUGH "FOR FRIENDS AND FAMILY"', value: '\u200B', inline: true},
-                {name: 'A booster will handle your request once you sent the money"', value: '\u200B', inline: true}
+                {name: 'A booster will handle your request once you sent the money', value: '\u200B', inline: true}
             )
             .setThumbnail('https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png')
             .setFooter({ text: 'Thank you very much — Zenox Shop Service <3'})
