@@ -129,8 +129,8 @@ client.on('interactionCreate', async interaction => {
 
             const button = new ButtonBuilder()
                 .setCustomId('buyButton')
-                .setLabel('🛒 Buy this account')
-                .setStyle(ButtonStyle.Success);
+                .setLabel('🎟️ Buy this account')
+                .setStyle(ButtonStyle.Primary);
 
             const row = new ActionRowBuilder().addComponents(button);
 
