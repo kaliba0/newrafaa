@@ -84,7 +84,9 @@ async function Rank30_fx(interaction, ticketNumber) {
                 { name: 'Notes', value: notes, inline: true },
                 { name: 'Service', value: 'Boost to rank 30', inline: true },
             )
-            .setFooter({ text: 'Please send the needed amount to the Paypal account. A booster will then handle your request' });
+            .setFooter({ 
+                text: `Ticket opened by ${interaction.user.username} on ${new Date().toLocaleString()}` 
+            });
 
         await ticketChannel.send({ embeds: [recapEmbed] });
 
@@ -94,10 +96,11 @@ async function Rank30_fx(interaction, ticketNumber) {
             .setDescription('Please send the needed amount with Paypal to this email adress : _____@gmail.com. YOU MUST SEND IT THROUGH "FOR FRIENDS AND FAMILY"')
             .addFields(
                 {name: '\u200B', value:'Please send the needed amount with Paypal to this email adress : _____@gmail.com.'},
-                {name: 'YOU MUST SEND IT THROUGH "FOR FRIENDS AND FAMILY"', value: '\u200B', inline: true}
+                {name: 'YOU MUST SEND IT THROUGH "FOR FRIENDS AND FAMILY"', value: '\u200B', inline: true},
+                {name: 'A booster will handle your request once you sent the money"', value: '\u200B', inline: true}
             )
             .setThumbnail('https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png')
-            .setFooter({ text: 'Thank you very much —— Zenox Shop Service <3'})
+            .setFooter({ text: 'Thank you very much — Zenox Shop Service <3'})
         
         await ticketChannel.send({ embeds: [paypalEmbed] });
 
