@@ -1,4 +1,5 @@
 const { ModalBuilder, TextInputBuilder, ActionRowBuilder, TextInputStyle, EmbedBuilder, ChannelType, PermissionsBitField } = require('discord.js');
+const { startInactivityTimer } = require('./inactiveTicketManager');
 const ticketscatId = process.env.TICKETS_CAT_ID;
 const adminRoleId = process.env.ADMIN_ROLE_ID;
 
@@ -85,16 +86,17 @@ async function TrophyBoost_fx(interaction, ticketNumber) {
         const paypalEmbed = new EmbedBuilder()
             .setColor(0x0A9EE9)
             .setTitle('How to pay ?')
-            .setDescription('Please send the needed amount with Paypal to this email adress : _____@gmail.com. YOU MUST SEND IT THROUGH "FOR FRIENDS AND FAMILY"')
             .addFields(
                 {name: '\u200B', value:'Please send the needed amount with Paypal to this email adress : _____@gmail.com.'},
-                {name: 'YOU MUST SEND IT THROUGH "FOR FRIENDS AND FAMILY"', value: '\u200B', inline: true},
-                {name: 'A booster will handle your request once you sent the money', value: '\u200B', inline: true}
+                {name: 'YOU MUST SEND IT THROUGH "FOR FRIENDS AND FAMILY"', value: '\u200B', inline: false},
+                {name: 'A booster will handle your request once you sent the money', value: '\u200B', inline: false}
             )
             .setThumbnail('https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png')
             .setFooter({ text: 'Thank you very much — Zenox Shop Service <3'})
         
         await ticketChannel.send({ embeds: [paypalEmbed] });
+
+        startInactivityTimer(ticketChannel);
 
         await modalInteraction.reply({ content: `You can follow your request in <#${ticketChannel.id}>.`, ephemeral: true });
     });

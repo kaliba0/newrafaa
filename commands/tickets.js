@@ -1,5 +1,7 @@
 const { Client, GatewayIntentBits, ActionRowBuilder, StringSelectMenuBuilder, EmbedBuilder } = require('discord.js');
 require('dotenv').config();
+const { startInactivityTimer, handleTicketActivity } = require('./fonctions/tickets/inactiveTicketManager');
+
 
 // Import des fonctions spécifiques
 const { Rank30_fx } = require('./fonctions/tickets/rank30');
@@ -178,5 +180,12 @@ client.on('interactionCreate', async interaction => {
         }
     }
 });
+
+client.on('messageCreate', async message => {
+    if (message.channel.parentId === ticketscatId) {
+        handleTicketActivity(message.channel);
+    }
+});
+
 
 client.login(token);

@@ -1,4 +1,5 @@
 const { ModalBuilder, TextInputBuilder, ActionRowBuilder, TextInputStyle, EmbedBuilder, ChannelType, PermissionsBitField } = require('discord.js');
+const { startInactivityTimer } = require('./inactiveTicketManager');
 const ticketscatId = process.env.TICKETS_CAT_ID;
 const adminRoleId = process.env.ADMIN_ROLE_ID;
 
@@ -102,7 +103,9 @@ async function Rank30_fx(interaction, ticketNumber) {
             .setFooter({ text: 'Thank you very much — Zenox Shop Service <3'})
         
         await ticketChannel.send({ embeds: [paypalEmbed] });
-
+        
+        startInactivityTimer(ticketChannel);
+        
         await modalInteraction.reply({ content: `You can follow your request in <#${ticketChannel.id}>.`, ephemeral: true });
     });
 }
