@@ -127,12 +127,17 @@ client.on('interactionCreate', async interaction => {
                 client.imageAttachment = null;
             }
 
-            const button = new ButtonBuilder()
+            const buyButton = new ButtonBuilder()
                 .setCustomId('buyButton')
                 .setLabel('🎟️ Buy this account')
                 .setStyle(ButtonStyle.Primary);
 
-            const row = new ActionRowBuilder().addComponents(button);
+            const markAsSoldButton = new ButtonBuilder()
+                .setCustomId('markAsSoldButton')
+                .setLabel('Mark this account as sold')
+                .setStyle(ButtonStyle.Danger);
+
+            const row = new ActionRowBuilder().addComponents(buyButton, markAsSoldButton);
 
             const targetChannel = client.channels.cache.get(accountChannelId);
             if (!targetChannel) {
@@ -147,6 +152,26 @@ client.on('interactionCreate', async interaction => {
         } catch (error) {
             console.error('Erreur lors de l\'envoi du récapitulatif:', error);
             await interaction.reply({ content: 'Une erreur s\'est produite lors de l\'envoi du récapitulatif. Veuillez réessayer.', ephemeral: true });
+        }
+    } else if (interaction.isButton() && interaction.customId === 'markAsSoldButton') {
+        if (!interaction.member.roles.cache.has(adminRoleId)) {
+            await interaction.reply({ content: 'You do not have the required permissions to use this button.', ephemeral: true });
+            return;
+        }
+
+        try {
+            const row = new ActionRowBuilder().addComponents(
+                new ButtonBuilder()
+                    .setCustomId('buyButton')
+                    .setLabel('This account has been sold')
+                    .setStyle(ButtonStyle.Danger)
+                    .setDisabled(true)
+            );
+
+            await interaction.update({ components: [row] });
+        } catch (error) {
+            console.error('Erreur lors de la mise à jour de l\'annonce:', error);
+            await interaction.reply({ content: 'Une erreur s\'est produite lors de la mise à jour de l\'annonce.', ephemeral: true });
         }
     } else if (interaction.isButton() && interaction.customId === 'buyButton') {
         try {
