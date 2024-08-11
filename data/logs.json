@@ -9,5 +9,92 @@
       "notes": "No additional notes"
     },
     "date": "8/11/2024, 8:48:36 AM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Ranked Boost",
+    "details": {
+      "actualRank": "test",
+      "wantedRank": "test2",
+      "notes": "papas"
+    },
+    "date": "8/11/2024, 8:54:33 AM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Boost to rank 35",
+    "details": {
+      "brawler": "ok",
+      "trophies": "ok",
+      "powerLevel": "ok",
+      "notes": "ok"
+    },
+    "date": "8/11/2024, 8:54:55 AM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Boost to rank 30",
+    "details": {
+      "brawler": "test",
+      "trophies": "test",
+      "powerLevel": "test",
+      "notes": "test"
+    },
+    "date": "8/11/2024, 8:56:52 AM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Boost to rank 30",
+    "details": {
+      "brawler": "ok",
+      "trophies": "ok",
+      "powerLevel": "ok",
+      "notes": "No additional notes"
+    },
+    "date": "8/11/2024, 8:57:56 AM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Boost to rank 30",
+    "details": {
+      "brawler": "test",
+      "trophies": "test",
+      "powerLevel": "est",
+      "notes": "No additional notes"
+    },
+    "date": "8/11/2024, 8:59:10 AM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Boost to rank 30",
+    "details": {
+      "brawler": "ok",
+      "trophies": "ok",
+      "powerLevel": "ok",
+      "notes": "No additional notes"
+    },
+    "date": "8/11/2024, 8:59:55 AM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Boost to rank 30",
+    "details": {
+      "brawler": "ok",
+      "trophies": "ok",
+      "powerLevel": "ok",
+      "notes": "No additional notes"
+    },
+    "date": "8/11/2024, 9:00:28 AM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Boost to rank 30",
+    "details": {
+      "brawler": "ok",
+      "trophies": "ok",
+      "powerLevel": "ok",
+      "notes": "No additional notes"
+    },
+    "date": "8/11/2024, 9:01:24 AM"
   }
 ]

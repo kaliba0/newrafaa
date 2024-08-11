@@ -103,7 +103,7 @@ async function Rank30_fx(interaction, ticketNumber) {
                 { name: 'Service', value: 'Boost to rank 30', inline: true },
             )
             .setFooter({ 
-                text: `Ticket opened by ${interaction.user.username} on ${new Date().toLocaleString()}` 
+                text: `Ticket opened by ${interaction.user.username} on ${new Date().toLocaleString()} \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B` 
             });
 
         await ticketChannel.send({ embeds: [recapEmbed] });

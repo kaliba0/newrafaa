@@ -92,7 +92,7 @@ async function TrophyBoost_fx(interaction, ticketNumber) {
                 { name: 'Service', value: 'Trophy Boost', inline: true },
             )
             .setFooter({ 
-                text: `Ticket opened by ${interaction.user.username} on ${new Date().toLocaleString()}` 
+                text: `Ticket opened by ${interaction.user.username} on ${new Date().toLocaleString()}  \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B` 
             });
 
         await ticketChannel.send({ embeds: [recapEmbed] });
