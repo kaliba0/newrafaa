@@ -4,7 +4,7 @@ const { logTicket } = require('./logTicket.js');
 const ticketscatId = process.env.TICKETS_CAT_ID;
 const adminRoleId = process.env.ADMIN_ROLE_ID;
 
-async function Other_fx(interaction, ticketNumber) {
+async function MiddleMan_fx(interaction, ticketNumber) {
     
     const guild = interaction.guild;
     const ticketChannel = await guild.channels.create({
@@ -37,9 +37,9 @@ async function Other_fx(interaction, ticketNumber) {
 
 
     const embed = new EmbedBuilder()
-        .setColor(0xFE3E2B)
-        .setTitle('Any questions ❓')
-        .setDescription('Ask your questions or report an issue here')
+        .setColor(0x0F268E)
+        .setTitle('MiddleMan 👥')
+        .setDescription('Hire me as a middleman !')
         .setFooter({ 
             text: `Ticket opened by ${interaction.user.username} on ${new Date().toLocaleString()}` 
         });
@@ -50,7 +50,7 @@ async function Other_fx(interaction, ticketNumber) {
 
     const ticketData = {
         author: interaction.user.username,
-        service: 'Other',
+        service: 'MiddleMan',
         date: new Date().toLocaleString()
     };
 
@@ -60,4 +60,4 @@ async function Other_fx(interaction, ticketNumber) {
 
 }
 
-module.exports = { Other_fx };
+module.exports = { MiddleMan_fx };

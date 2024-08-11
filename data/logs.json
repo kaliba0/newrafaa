@@ -96,5 +96,36 @@
       "notes": "No additional notes"
     },
     "date": "8/11/2024, 9:01:24 AM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Ranked Boost",
+    "details": {
+      "actualRank": "gold",
+      "wantedRank": "diamond",
+      "notes": "No additional notes"
+    },
+    "date": "8/11/2024, 9:13:05 AM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Boost to rank 35",
+    "details": {
+      "brawler": "ok",
+      "trophies": "ok",
+      "powerLevel": "ok",
+      "notes": "ok"
+    },
+    "date": "8/11/2024, 9:26:33 PM"
+  },
+  {
+    "author": "antterzn",
+    "service": "MiddleMan",
+    "date": "8/11/2024, 10:01:17 PM"
+  },
+  {
+    "author": "antterzn",
+    "service": "MiddleMan",
+    "date": "8/11/2024, 10:04:09 PM"
   }
 ]

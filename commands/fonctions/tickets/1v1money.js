@@ -4,7 +4,7 @@ const { logTicket } = require('./logTicket.js');
 const ticketscatId = process.env.TICKETS_CAT_ID;
 const adminRoleId = process.env.ADMIN_ROLE_ID;
 
-async function Other_fx(interaction, ticketNumber) {
+async function Money1V1_fx(interaction, ticketNumber) {
     
     const guild = interaction.guild;
     const ticketChannel = await guild.channels.create({
@@ -37,20 +37,33 @@ async function Other_fx(interaction, ticketNumber) {
 
 
     const embed = new EmbedBuilder()
-        .setColor(0xFE3E2B)
-        .setTitle('Any questions ❓')
-        .setDescription('Ask your questions or report an issue here')
+        .setColor(0xFFBB00)
+        .setTitle('1V1 for Money 💸')
+        .setDescription('Want to do an 1v1 to win some money ?')
         .setFooter({ 
             text: `Ticket opened by ${interaction.user.username} on ${new Date().toLocaleString()}` 
         });
 
     await ticketChannel.send({ embeds: [embed] });
 
+    const paypalEmbed = new EmbedBuilder()
+        .setColor(0x0A9EE9)
+            .setTitle('How to pay ?')
+            .addFields(
+                {name: '\u200B', value:'Please send the needed amount with Paypal to this email adress : _____@gmail.com.'},
+                {name: 'YOU MUST SEND IT THROUGH "FOR FRIENDS AND FAMILY"', value: '\u200B', inline: false},
+                {name: 'A booster will handle your request once you sent the money', value: '\u200B', inline: false}
+            )
+            .setThumbnail('https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png')
+            .setFooter({ text: 'Thank you very much — Zenox Shop Service <3'})
+        
+    await ticketChannel.send({ embeds: [paypalEmbed] });
+
     startInactivityTimer(ticketChannel);
 
     const ticketData = {
         author: interaction.user.username,
-        service: 'Other',
+        service: '1V1 for Money',
         date: new Date().toLocaleString()
     };
 
@@ -60,4 +73,4 @@ async function Other_fx(interaction, ticketNumber) {
 
 }
 
-module.exports = { Other_fx };
+module.exports = { Money1V1_fx };

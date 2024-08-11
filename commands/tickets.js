@@ -8,9 +8,9 @@ const { Rank30_fx } = require('./fonctions/tickets/rank30');
 const { Rank35_fx } = require('./fonctions/tickets/rank35');
 const { Ranked_fx } = require('./fonctions/tickets/ranked');
 const { TrophyBoost_fx } = require('./fonctions/tickets/trophyBoost');
-// const { Add_fx } = require('./fonctions/tickets/add');
-// const { MiddleMan_fx } = require('./fonctions/tickets/middleman');
-// const { Money1V1_fx } = require('./fonctions/tickets/1v1money');
+const { Add_fx } = require('./fonctions/tickets/add');
+const { MiddleMan_fx } = require('./fonctions/tickets/middleman');
+const { Money1V1_fx } = require('./fonctions/tickets/1v1money');
 const { Other_fx } = require('./fonctions/tickets/other');
 
 // Modifications pour le .env
@@ -161,15 +161,15 @@ client.on('interactionCreate', async interaction => {
                         TrophyBoost_fx(interaction, ticketNumber++);
                         break;
                     case 'add':
-                        // Add_fx(interaction, ticketNumber++);
+                        Add_fx(interaction, ticketNumber++);
                         console.log('add')
                         break;
                     case 'middleman':
-                        // MiddleMan_fx(interaction, ticketNumber++);
+                        MiddleMan_fx(interaction, ticketNumber++);
                         console.log('middleman')
                         break;
                     case '1v1_money':
-                        // Money1V1_fx(interaction, ticketNumber++);
+                        Money1V1_fx(interaction, ticketNumber++);
                         console.log('1v1 money')
                         break;
                     default:

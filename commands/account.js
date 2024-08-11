@@ -150,7 +150,7 @@ client.on('interactionCreate', async interaction => {
 
             await targetChannel.send({ embeds: [embed], components: [row] });
 
-            await interaction.reply({ content: 'Votre récapitulatif a été envoyé dans le salon <#${ticketChannel.id}>.', ephemeral: true });
+            await interaction.reply({ content: 'Votre récapitulatif a été envoyé dans le salon <#${targetChannel.id}>.', ephemeral: true });
         } catch (error) {
             console.error('Erreur lors de l\'envoi du récapitulatif:', error);
             await interaction.reply({ content: 'Une erreur s\'est produite lors de l\'envoi du récapitulatif. Veuillez réessayer.', ephemeral: true });
