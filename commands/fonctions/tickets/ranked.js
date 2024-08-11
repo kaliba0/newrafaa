@@ -1,5 +1,6 @@
 const { ModalBuilder, TextInputBuilder, ActionRowBuilder, TextInputStyle, EmbedBuilder, ChannelType, PermissionsBitField } = require('discord.js');
 const { startInactivityTimer } = require('./inactiveTicketManager');
+const { logTicket } = require('./logTicket.js');
 const ticketscatId = process.env.TICKETS_CAT_ID;
 const adminRoleId = process.env.ADMIN_ROLE_ID;
 
@@ -38,6 +39,19 @@ async function Ranked_fx(interaction, ticketNumber) {
         const actualRanked = modalInteraction.fields.getTextInputValue('actual_ranked-input');
         const newRanked = modalInteraction.fields.getTextInputValue('new_ranked-input');
         const notes = modalInteraction.fields.getTextInputValue('notes-input') || 'No additional notes';
+
+        const ticketData = {
+            author: interaction.user.username,
+            service: 'Ranked Boost',
+            details: {
+                actualRank: actualRanked,
+                wantedRank: newRanked,
+                notes: notes
+            },
+            date: new Date().toLocaleString()
+        };
+
+        logTicket(ticketData);
 
         const guild = interaction.guild;
         const ticketChannel = await guild.channels.create({

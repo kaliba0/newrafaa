@@ -1,5 +1,6 @@
 const { ModalBuilder, TextInputBuilder, ActionRowBuilder, TextInputStyle, EmbedBuilder, ChannelType, PermissionsBitField } = require('discord.js');
 const { startInactivityTimer } = require('./inactiveTicketManager');
+const { logTicket } = require('./logTicket.js');
 const ticketscatId = process.env.TICKETS_CAT_ID;
 const adminRoleId = process.env.ADMIN_ROLE_ID;
 
@@ -45,6 +46,20 @@ async function Rank35_fx(interaction, ticketNumber) {
         const actualTrophy = modalInteraction.fields.getTextInputValue('actual_rank-input');
         const powerLevel = modalInteraction.fields.getTextInputValue('power-level-input');
         const notes = modalInteraction.fields.getTextInputValue('notes-input') || 'No additional notes';
+
+        const ticketData = {
+            author: interaction.user.username,
+            service: 'Boost to rank 35',
+            details: {
+                brawler: brawlerName,
+                trophies: actualTrophy,
+                powerLevel: powerLevel,
+                notes: notes
+            },
+            date: new Date().toLocaleString()
+        };
+
+        logTicket(ticketData);
 
         const guild = interaction.guild;
         const ticketChannel = await guild.channels.create({
