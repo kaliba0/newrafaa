@@ -115,7 +115,10 @@ client.on('interactionCreate', async interaction => {
 
             const row = new ActionRowBuilder().addComponents(selectMenu);
 
-            await interaction.reply({ embeds: [embed], components: [row] });
+            await interaction.channel.send({ embeds: [embed], components: [row] });
+
+            await interaction.deferReply({ ephemeral: true });
+            await interaction.deleteReply();
 
         } else if (interaction.commandName === 'ticket' && interaction.options.getSubcommand() === 'close') {
             // Vérifiez si l'utilisateur a le rôle admin

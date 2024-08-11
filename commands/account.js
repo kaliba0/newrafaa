@@ -1,6 +1,6 @@
 const { Client, GatewayIntentBits, ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder, ButtonBuilder, ButtonStyle, InteractionType, EmbedBuilder, PermissionsBitField, ChannelType } = require('discord.js');
 require('dotenv').config();
-const { startInactivityTimer, handleTicketActivity } = require('./inactiveTicketManager'); // Importez les fonctions d'inactivité
+const { startInactivityTimer, handleTicketActivity } = require('./fonctions/tickets/inactiveTicketManager'); // Importez les fonctions d'inactivité
 
 
 // Variables d'environnement
@@ -75,13 +75,13 @@ client.on('interactionCreate', async interaction => {
                 .setCustomId('rank35')
                 .setLabel('Rank 35')
                 .setStyle(TextInputStyle.Short)
-                .setRequired(true);
+                .setRequired(false);
 
             const rank30 = new TextInputBuilder()
                 .setCustomId('rank30')
                 .setLabel('Rank 30')
                 .setStyle(TextInputStyle.Short)
-                .setRequired(true);
+                .setRequired(false);
 
             const description = new TextInputBuilder()
                 .setCustomId('description')
@@ -106,8 +106,8 @@ client.on('interactionCreate', async interaction => {
         try {
             const price = interaction.fields.getTextInputValue('price');
             const trophies = interaction.fields.getTextInputValue('trophies');
-            const rank35 = interaction.fields.getTextInputValue('rank35');
-            const rank30 = interaction.fields.getTextInputValue('rank30');
+            const rank35 = interaction.fields.getTextInputValue('rank35') || '0';
+            const rank30 = interaction.fields.getTextInputValue('rank30') || '0';
             const description = interaction.fields.getTextInputValue('description') || '';
 
             const embed = new EmbedBuilder()
@@ -150,7 +150,7 @@ client.on('interactionCreate', async interaction => {
 
             await targetChannel.send({ embeds: [embed], components: [row] });
 
-            await interaction.reply({ content: 'Votre récapitulatif a été envoyé dans le salon désigné.', ephemeral: true });
+            await interaction.reply({ content: 'Votre récapitulatif a été envoyé dans le salon <#${ticketChannel.id}>.', ephemeral: true });
         } catch (error) {
             console.error('Erreur lors de l\'envoi du récapitulatif:', error);
             await interaction.reply({ content: 'Une erreur s\'est produite lors de l\'envoi du récapitulatif. Veuillez réessayer.', ephemeral: true });
