@@ -1,5 +1,7 @@
 const { Client, GatewayIntentBits, ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder, ButtonBuilder, ButtonStyle, InteractionType, EmbedBuilder, PermissionsBitField, ChannelType } = require('discord.js');
 require('dotenv').config();
+const { startInactivityTimer, handleTicketActivity } = require('./inactiveTicketManager'); // Importez les fonctions d'inactivité
+
 
 // Variables d'environnement
 const token = process.env.TOKEN;
@@ -225,11 +227,19 @@ client.on('interactionCreate', async interaction => {
 
             await ticketChannel.send({ embeds: [recapEmbed] });
 
+            startInactivityTimer(ticketChannel);
+
             await interaction.reply({ content: `✅ Vous avez choisi d'acheter ce compte. Vous pouvez suivre votre demande dans <#${ticketChannel.id}>.`, ephemeral: true });
         } catch (error) {
             console.error('Erreur lors de la création du salon de ticket:', error);
             await interaction.reply({ content: 'Une erreur s\'est produite lors de la création du salon de ticket. Veuillez réessayer.', ephemeral: true });
         }
+    }
+});
+
+client.on('messageCreate', async message => {
+    if (message.channel.parentId === ticketscatId) {
+        handleTicketActivity(message.channel);
     }
 });
 
