@@ -1,131 +1,54 @@
 [
   {
     "author": "antterzn",
-    "service": "Boost to rank 30",
-    "details": {
-      "brawler": "jacky",
-      "trophies": "600",
-      "powerLevel": "p10",
-      "notes": "No additional notes"
-    },
-    "date": "8/11/2024, 8:48:36 AM"
+    "service": "1V1 for Money",
+    "date": "8/11/2024, 10:14:58 PM"
   },
   {
-    "author": "antterzn",
-    "service": "Ranked Boost",
-    "details": {
-      "actualRank": "test",
-      "wantedRank": "test2",
-      "notes": "papas"
-    },
-    "date": "8/11/2024, 8:54:33 AM"
+    "author": "zenox19.",
+    "service": "1V1 for Money",
+    "date": "8/11/2024, 10:49:40 PM"
   },
   {
-    "author": "antterzn",
-    "service": "Boost to rank 35",
+    "author": "zenox19.",
+    "service": "Trophy Boost",
     "details": {
-      "brawler": "ok",
-      "trophies": "ok",
-      "powerLevel": "ok",
-      "notes": "ok"
+      "actualTrophy": "1",
+      "wantedTrophies": "12",
+      "notes": "no"
     },
-    "date": "8/11/2024, 8:54:55 AM"
+    "date": "8/11/2024, 10:49:54 PM"
   },
   {
-    "author": "antterzn",
-    "service": "Boost to rank 30",
-    "details": {
-      "brawler": "test",
-      "trophies": "test",
-      "powerLevel": "test",
-      "notes": "test"
-    },
-    "date": "8/11/2024, 8:56:52 AM"
-  },
-  {
-    "author": "antterzn",
-    "service": "Boost to rank 30",
-    "details": {
-      "brawler": "ok",
-      "trophies": "ok",
-      "powerLevel": "ok",
-      "notes": "No additional notes"
-    },
-    "date": "8/11/2024, 8:57:56 AM"
-  },
-  {
-    "author": "antterzn",
-    "service": "Boost to rank 30",
-    "details": {
-      "brawler": "test",
-      "trophies": "test",
-      "powerLevel": "est",
-      "notes": "No additional notes"
-    },
-    "date": "8/11/2024, 8:59:10 AM"
-  },
-  {
-    "author": "antterzn",
-    "service": "Boost to rank 30",
-    "details": {
-      "brawler": "ok",
-      "trophies": "ok",
-      "powerLevel": "ok",
-      "notes": "No additional notes"
-    },
-    "date": "8/11/2024, 8:59:55 AM"
-  },
-  {
-    "author": "antterzn",
-    "service": "Boost to rank 30",
-    "details": {
-      "brawler": "ok",
-      "trophies": "ok",
-      "powerLevel": "ok",
-      "notes": "No additional notes"
-    },
-    "date": "8/11/2024, 9:00:28 AM"
-  },
-  {
-    "author": "antterzn",
-    "service": "Boost to rank 30",
-    "details": {
-      "brawler": "ok",
-      "trophies": "ok",
-      "powerLevel": "ok",
-      "notes": "No additional notes"
-    },
-    "date": "8/11/2024, 9:01:24 AM"
-  },
-  {
-    "author": "antterzn",
+    "author": "4nt01n",
     "service": "Ranked Boost",
     "details": {
       "actualRank": "gold",
       "wantedRank": "diamond",
       "notes": "No additional notes"
     },
-    "date": "8/11/2024, 9:13:05 AM"
+    "date": "8/11/2024, 10:50:33 PM"
   },
   {
     "author": "antterzn",
-    "service": "Boost to rank 35",
+    "service": "Boost to rank 30",
     "details": {
-      "brawler": "ok",
-      "trophies": "ok",
-      "powerLevel": "ok",
-      "notes": "ok"
+      "brawler": "polly",
+      "trophies": "800",
+      "powerLevel": "11",
+      "notes": "No additional notes"
     },
-    "date": "8/11/2024, 9:26:33 PM"
+    "date": "8/12/2024, 10:58:20 AM"
   },
   {
     "author": "antterzn",
-    "service": "MiddleMan",
-    "date": "8/11/2024, 10:01:17 PM"
-  },
-  {
-    "author": "antterzn",
-    "service": "MiddleMan",
-    "date": "8/11/2024, 10:04:09 PM"
+    "service": "Boost to rank 30",
+    "details": {
+      "brawler": "polly",
+      "trophies": "890",
+      "powerLevel": "11",
+      "notes": "No additional notes"
+    },
+    "date": "8/12/2024, 10:59:48 AM"
   }
 ]

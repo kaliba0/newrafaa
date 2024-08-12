@@ -99,6 +99,7 @@ async function Rank35_fx(interaction, ticketNumber) {
                 { name: 'Power', value: powerLevel, inline: true },
                 { name: 'Notes', value: notes, inline: true },
                 { name: 'Service', value: 'Boost to rank 35', inline: true },
+                { name: 'Price :', value: `**50€**`, inline:true},
             )
             .setFooter({ 
                 text: `Ticket opened by ${interaction.user.username} on ${new Date().toLocaleString()}  \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B` 
@@ -110,7 +111,7 @@ async function Rank35_fx(interaction, ticketNumber) {
         .setColor(0x0A9EE9)
             .setTitle('How to pay ?')
             .addFields(
-                {name: '\u200B', value:'Please send the needed amount with Paypal to this email adress : _____@gmail.com.'},
+                {name: '\u200B', value:`Please send the needed amount (**50€**)with Paypal to this email adress : _____@gmail.com.`},
                 {name: 'YOU MUST SEND IT THROUGH "FOR FRIENDS AND FAMILY"', value: '\u200B', inline: false},
                 {name: 'A booster will handle your request once you sent the money', value: '\u200B', inline: false}
             )
