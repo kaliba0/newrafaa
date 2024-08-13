@@ -12,11 +12,13 @@ async function TrophyBoost_fx(interaction, ticketNumber) {
     const actualTrophyInput = new TextInputBuilder()
         .setCustomId('actual_trophy-input')
         .setLabel('What is your actual trophy number ?')
+        .setPlaceholder('Please just type your trophy number')
         .setStyle(TextInputStyle.Short);
 
     const newTrophyInput = new TextInputBuilder()
         .setCustomId('new_trophy-input')
         .setLabel('How many trophies do you want ?')
+        .setPlaceholder('Please just type the number of trophy you want')
         .setStyle(TextInputStyle.Short);
 
     const notesInput = new TextInputBuilder()
@@ -39,6 +41,27 @@ async function TrophyBoost_fx(interaction, ticketNumber) {
         const actualTrophy = modalInteraction.fields.getTextInputValue('actual_trophy-input');
         const newTrophy = modalInteraction.fields.getTextInputValue('new_trophy-input');
         const notes = modalInteraction.fields.getTextInputValue('notes-input') || 'No additional notes';
+
+        if (isNaN(actualTrophy) || isNaN(newTrophy)) {
+            await modalInteraction.reply({ 
+                content: 'Error: Please enter valid numbers only for both trophy fields.', 
+                ephemeral: true 
+            });
+            return;
+        }
+
+        // Validation pour vérifier que les valeurs sont positives et que newTrophy > actualTrophy
+        if (Number(actualTrophy) <= 0 || Number(newTrophy) <= 0 || Number(newTrophy) <= Number(actualTrophy)) {
+            await modalInteraction.reply({ 
+                content: 'Error: Make sure both trophy values are positive and that the new trophy count is higher than the current trophy count.', 
+                ephemeral: true 
+            });
+            return;
+        }
+
+        price = ((newTrophy - actualTrophy)/100) * 5
+
+
 
         const ticketData = {
             author: interaction.user.username,
@@ -90,6 +113,7 @@ async function TrophyBoost_fx(interaction, ticketNumber) {
                 { name: 'Desired Trophies', value: newTrophy, inline: true },
                 { name: 'Notes', value: notes, inline: true },
                 { name: 'Service', value: 'Trophy Boost', inline: true },
+                { name: 'Price', value: `**${price}€**`, inline: true },
             )
             .setFooter({ 
                 text: `Ticket opened by ${interaction.user.username} on ${new Date().toLocaleString()}  \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B` 
@@ -101,7 +125,7 @@ async function TrophyBoost_fx(interaction, ticketNumber) {
             .setColor(0x0A9EE9)
             .setTitle('How to pay ?')
             .addFields(
-                {name: '\u200B', value:'Please send the needed amount with Paypal to this email adress : _____@gmail.com.'},
+                {name: '\u200B', value:`Please send the needed amount (**${price}€**) with Paypal to this email adress : _____@gmail.com.`},
                 {name: 'YOU MUST SEND IT THROUGH "FOR FRIENDS AND FAMILY"', value: '\u200B', inline: false},
                 {name: 'A booster will handle your request once you sent the money', value: '\u200B', inline: false}
             )

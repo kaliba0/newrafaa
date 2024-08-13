@@ -1,54 +1,22 @@
 [
   {
     "author": "antterzn",
-    "service": "1V1 for Money",
-    "date": "8/11/2024, 10:14:58 PM"
-  },
-  {
-    "author": "zenox19.",
-    "service": "1V1 for Money",
-    "date": "8/11/2024, 10:49:40 PM"
-  },
-  {
-    "author": "zenox19.",
-    "service": "Trophy Boost",
-    "details": {
-      "actualTrophy": "1",
-      "wantedTrophies": "12",
-      "notes": "no"
-    },
-    "date": "8/11/2024, 10:49:54 PM"
-  },
-  {
-    "author": "4nt01n",
     "service": "Ranked Boost",
     "details": {
-      "actualRank": "gold",
-      "wantedRank": "diamond",
+      "actualRank": "2",
+      "wantedRank": "7",
       "notes": "No additional notes"
     },
-    "date": "8/11/2024, 10:50:33 PM"
+    "date": "8/13/2024, 4:09:59 PM"
   },
   {
     "author": "antterzn",
-    "service": "Boost to rank 30",
+    "service": "Trophy Boost",
     "details": {
-      "brawler": "polly",
-      "trophies": "800",
-      "powerLevel": "11",
+      "actualTrophy": "12000",
+      "wantedTrophies": "20000",
       "notes": "No additional notes"
     },
-    "date": "8/12/2024, 10:58:20 AM"
-  },
-  {
-    "author": "antterzn",
-    "service": "Boost to rank 30",
-    "details": {
-      "brawler": "polly",
-      "trophies": "890",
-      "powerLevel": "11",
-      "notes": "No additional notes"
-    },
-    "date": "8/12/2024, 10:59:48 AM"
+    "date": "8/13/2024, 4:19:56 PM"
   }
 ]
