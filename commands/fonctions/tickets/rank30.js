@@ -113,7 +113,7 @@ async function Rank30_fx(interaction, ticketNumber) {
             .setColor(0x0A9EE9)
             .setTitle('How to pay ?')
             .addFields(
-                {name: '\u200B', value:`Please send the needed amount (**10€**) with Paypal to this email adress : _____@gmail.com.`},
+                {name: '\u200B', value:`Please send the needed amount (**10€**) with Paypal to this account: **zenoxbss**.`},
                 {name: 'YOU MUST SEND IT THROUGH "FOR FRIENDS AND FAMILY"', value: '\u200B', inline: false},
                 {name: 'A booster will handle your request once you sent the money', value: '\u200B', inline: false}
             )

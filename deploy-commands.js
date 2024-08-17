@@ -20,6 +20,10 @@ const commands = [
         description: 'Create a new ticket',
     },
     {
+        name: 'add',
+        description: 'Add a player',
+    },
+    {
         name: 'ticket',
         description: 'Manage tickets',
         options: [

@@ -18,7 +18,7 @@ client.once('ready', () => {
     console.log('/account is available');
 });
 
-let accountChannelNumber = 0;
+let accountChannelNumber = 6;
 
 client.on('interactionCreate', async interaction => {
     if (interaction.isCommand()) {

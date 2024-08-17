@@ -8,7 +8,6 @@ const { Rank30_fx } = require('./fonctions/tickets/rank30');
 const { Rank35_fx } = require('./fonctions/tickets/rank35');
 const { Ranked_fx } = require('./fonctions/tickets/ranked');
 const { TrophyBoost_fx } = require('./fonctions/tickets/trophyBoost');
-const { Add_fx } = require('./fonctions/tickets/add');
 const { MiddleMan_fx } = require('./fonctions/tickets/middleman');
 const { Money1V1_fx } = require('./fonctions/tickets/1v1money');
 const { Other_fx } = require('./fonctions/tickets/other');
@@ -33,7 +32,7 @@ const client = new Client({
     ]
 });
 
-let ticketNumber = 1; 
+let ticketNumber = 7; 
 
 client.once('ready', () => {
     console.log('/tickets is available!');
@@ -86,12 +85,6 @@ client.on('interactionCreate', async interaction => {
                         description: 'Increase your trophy number',
                         emoji: '1270087684584640606',
                         value: 'trophy_boost',
-                    },
-                    {
-                        label: 'Adds',
-                        description: 'Buy an add',
-                        emoji: '➕',
-                        value: 'add',
                     },
                     {
                         label: 'MiddleMan (MM)',
@@ -159,10 +152,6 @@ client.on('interactionCreate', async interaction => {
                         break;
                     case 'trophy_boost':
                         TrophyBoost_fx(interaction, ticketNumber++);
-                        break;
-                    case 'add':
-                        Add_fx(interaction, ticketNumber++);
-                        console.log('add')
                         break;
                     case 'middleman':
                         MiddleMan_fx(interaction, ticketNumber++);
