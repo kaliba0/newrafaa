@@ -9,8 +9,10 @@ const guildId = process.env.GUILD_ID;
 const clientId = process.env.CLIENT_ID;
 const adminRoleId = process.env.ADMIN_ROLE_ID;
 const ticketscatId = process.env.TICKETS_CAT_ID;
-const accountChannelId = process.env.ACCOUNT_CHANNEL_ID;
 const addAccountChannelId = process.env.ADD_ACCOUNT_CHANNEL_ID;
+const tierAId= process.env.ACCOUNT_A_CHANNEL_ID;
+const tierBId= process.env.ACCOUNT_B_CHANNEL_ID;
+const tierCId= process.env.ACCOUNT_C_CHANNEL_ID;
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
@@ -110,6 +112,22 @@ client.on('interactionCreate', async interaction => {
             const rank30 = interaction.fields.getTextInputValue('rank30') || '0';
             const description = interaction.fields.getTextInputValue('description') || '';
 
+            if (isNaN(price) || price.trim() === "") {
+                await interaction.reply({ content: 'Please enter a valid number for the price.', ephemeral: true });
+                return;
+            }
+
+            let targetChannelId;
+            const numericPrice = parseFloat(price);
+
+            if (numericPrice <= 100) {
+                targetChannelId = tierCId;
+            } else if (numericPrice > 100 && numericPrice <= 200) {
+                targetChannelId = tierBId;
+            } else {
+                targetChannelId = tierAId;
+            }
+
             const embed = new EmbedBuilder()
                 .setTitle('‼️ A NEW ACCOUNT IS FOR SALE ‼️')
                 .setColor('#FFBB00')
@@ -141,7 +159,7 @@ client.on('interactionCreate', async interaction => {
 
             const row = new ActionRowBuilder().addComponents(buyButton, markAsSoldButton);
 
-            const targetChannel = client.channels.cache.get(accountChannelId);
+            const targetChannel = client.channels.cache.get(targetChannelId);
             if (!targetChannel) {
                 console.error('Salon cible introuvable.');
                 await interaction.reply({ content: 'Le salon cible est introuvable. Veuillez vérifier la configuration.', ephemeral: true });
