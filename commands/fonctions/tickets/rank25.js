@@ -5,7 +5,7 @@ const ticketscatId = process.env.TICKETS_CAT_ID;
 const adminRoleId = process.env.ADMIN_ROLE_ID;
 
 
-async function Rank35_fx(interaction, ticketNumber) {
+async function Rank25_fx(interaction, ticketNumber) {
     const modal = new ModalBuilder()
         .setCustomId('brawler-modal')
         .setTitle('Brawler Boost Information');
@@ -50,7 +50,7 @@ async function Rank35_fx(interaction, ticketNumber) {
 
         const ticketData = {
             author: interaction.user.username,
-            service: 'Boost to rank 35',
+            service: 'Boost to rank 25',
             details: {
                 brawler: brawlerName,
                 trophies: actualTrophy,
@@ -100,7 +100,7 @@ async function Rank35_fx(interaction, ticketNumber) {
                 { name: 'Trophies', value: actualTrophy, inline: true },
                 { name: 'Power', value: powerLevel, inline: true },
                 { name: 'Notes', value: notes, inline: true },
-                { name: 'Service', value: 'Boost to rank 35', inline: true },
+                { name: 'Service', value: 'Boost to rank 25', inline: true },
                 { name: 'Estimated Price :', value: `**To define**`, inline:true},
             )
             .setFooter({ 
@@ -128,4 +128,4 @@ async function Rank35_fx(interaction, ticketNumber) {
     });
 }
 
-module.exports = { Rank35_fx };
+module.exports = { Rank25_fx };

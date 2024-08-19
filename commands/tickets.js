@@ -4,25 +4,18 @@ const { startInactivityTimer, handleTicketActivity } = require('./fonctions/tick
 
 
 // Import des fonctions spécifiques
+const { Rank25_fx } = require('./fonctions/tickets/rank25');
 const { Rank30_fx } = require('./fonctions/tickets/rank30');
 const { Rank35_fx } = require('./fonctions/tickets/rank35');
 const { Ranked_fx } = require('./fonctions/tickets/ranked');
 const { TrophyBoost_fx } = require('./fonctions/tickets/trophyBoost');
-const { MiddleMan_fx } = require('./fonctions/tickets/middleman');
-const { Money1V1_fx } = require('./fonctions/tickets/1v1money');
 const { Other_fx } = require('./fonctions/tickets/other');
 
 // Modifications pour le .env
 const token = process.env.TOKEN;
-const guildId = process.env.GUILD_ID;
-const clientId = process.env.CLIENT_ID;
 const adminRoleId = process.env.ADMIN_ROLE_ID;
 const ticketscatId = process.env.TICKETS_CAT_ID;
-const accountChannelId = process.env.ACCOUNT_CHANNEL_ID;
-const addAccountChannelId = process.env.ADD_ACCOUNT_CHANNEL_ID;
-const addFriendChannelId = process.env.ADD_FRIEND_CHANNEL_ID;
 const ticketChannelId = process.env.TICKET_CHANNEL_ID;
-const paypalChannelId = process.env.PAYPAL_CHANNEL_ID;
 
 const client = new Client({
     intents: [
@@ -32,7 +25,7 @@ const client = new Client({
     ]
 });
 
-let ticketNumber = 7; 
+let ticketNumber = 0; 
 
 client.once('ready', () => {
     console.log('/tickets is available!');
@@ -54,49 +47,43 @@ client.on('interactionCreate', async interaction => {
             const embed = new EmbedBuilder()
                 .setColor(0xFFBB00)
                 .setTitle('Interested in our services?')
-                .setDescription('To create a ticket, choose what you are interested in!')
+                .setDescription('We sell many things ! To create a ticket, choose what you are interested in!')
                 .setThumbnail('https://logos-world.net/wp-content/uploads/2021/08/Brawl-Stars-Emblem.png')
-                .setFooter({ text: 'Zenox Shop Service <3' });
+                .setFooter({ text: 'Φ RAFAAA STORE Φ' });
 
             const selectMenu = new StringSelectMenuBuilder()
                 .setCustomId('select-service')
                 .setPlaceholder('Select an option')
                 .addOptions([
                     {
+                        label: 'Rank 25',
+                        description: 'Get a brawler boosted to rank 25',
+                        value: 'rank25',
+                        emoji: '1275072531920982127',
+                    },
+                    {
                         label: 'Rank 30',
                         description: 'Get a brawler boosted to rank 30',
                         value: 'rank30',
-                        emoji: '1268684339408011365',
+                        emoji: '1275072757792510034',
                     },
                     {
                         label: 'Rank 35',
                         description: 'Get a brawler boosted to rank 35',
                         value: 'rank35',
-                        emoji: '1268684199154421891',
+                        emoji: '1275072588934283345',
                     },
                     {
                         label: 'Ranked',
                         description:'Upgrade your rank',
-                        emoji: '1270087474512793631',
+                        emoji: '1275072840999112776',
                         value: 'ranked',
                     },
                     {
                         label: 'Trophy Boost',
                         description: 'Increase your trophy number',
-                        emoji: '1270087684584640606',
+                        emoji: '1275073059400978465',
                         value: 'trophy_boost',
-                    },
-                    {
-                        label: 'MiddleMan (MM)',
-                        description: 'If you need a MiddleMan',
-                        emoji: '👥',
-                        value: 'middleman',
-                    },
-                    {
-                        label: '1V1 for Money',
-                        description: 'Play a 1v1 and earn more money',
-                        emoji: '💸',
-                        value: '1v1_money',
                     },
                     {
                         label: 'Other',
@@ -141,6 +128,9 @@ client.on('interactionCreate', async interaction => {
 
             if (interaction.values && interaction.values.length > 0) {
                 switch (interaction.values[0]) {
+                    case 'rank25':
+                        Rank25_fx(interaction, ticketNumber++);
+                        break;
                     case 'rank30':
                         Rank30_fx(interaction, ticketNumber++);
                         break;
@@ -152,14 +142,6 @@ client.on('interactionCreate', async interaction => {
                         break;
                     case 'trophy_boost':
                         TrophyBoost_fx(interaction, ticketNumber++);
-                        break;
-                    case 'middleman':
-                        MiddleMan_fx(interaction, ticketNumber++);
-                        console.log('middleman')
-                        break;
-                    case '1v1_money':
-                        Money1V1_fx(interaction, ticketNumber++);
-                        console.log('1v1 money')
                         break;
                     default:
                         Other_fx(interaction, ticketNumber++);

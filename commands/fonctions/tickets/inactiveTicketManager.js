@@ -1,6 +1,6 @@
 const { EmbedBuilder } = require('discord.js');
 
-const inactivityPeriod = 5 * 24 * 60 * 60 * 1000; // 5 jours en millisecondes
+const inactivityPeriod = 3 * 24 * 60 * 60 * 1000; // 3 jours en millisecondes
 const warningPeriod = 1 * 60 * 60 * 1000; // 1 heure en millisecondes
 
 let inactivityTimers = {};
