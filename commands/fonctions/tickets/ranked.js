@@ -152,30 +152,30 @@ async function Ranked_fx(interaction, ticketNumber) {
                 { name: 'New Rank', value: newRankedName, inline: true },
                 { name: 'Notes', value: notes, inline: true },
                 { name: 'Service', value: 'Ranked Boost', inline: true },
-                { name: 'Price :', value: `**${price}€**`, inline:true},
+                { name: 'Estimated Price :', value: `**${price}€**`, inline:true},
             )
             .setFooter({ 
-                text: `Ticket opened by ${interaction.user.username} on ${new Date().toLocaleString()}  \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B` 
+                text: `Ticket opened by ${interaction.user.username} on ${new Date().toLocaleString()}` 
             });
 
         await ticketChannel.send({ embeds: [recapEmbed] });
 
-            const paypalEmbed = new EmbedBuilder()
+        const paypalEmbed = new EmbedBuilder()
             .setColor(0x0A9EE9)
-            .setTitle('How to pay ?')
+            .setTitle('Thank you very much for your order !')
             .addFields(
-                {name: '\u200B', value:`Please send the needed amount (**${price}€**)with Paypal to this account: **zenoxbss**.`},
-                {name: 'YOU MUST SEND IT THROUGH "FOR FRIENDS AND FAMILY"', value: '\u200B', inline: false},
-                {name: 'A booster will handle your request once you sent the money', value: '\u200B', inline: false}
+                {name: 'How to pay ?', value:`Please send the needed amount (**To define**) with Paypal to this account: **______**.`},
+                {name: 'A booster will handle your request very soon', value: '\u200B', inline: false},
+                {name: '\u200B', value: 'Thanks again for trusting us 🧡'},
             )
             .setThumbnail('https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png')
-            .setFooter({ text: 'Thank you very much — Zenox Shop Service <3'})
+            .setFooter({ text: 'Φ RAFAAA STORE Φ'})
         
         await ticketChannel.send({ embeds: [paypalEmbed] });
 
         startInactivityTimer(ticketChannel);
 
-        await modalInteraction.reply({ content: `You can follow your request in <#${ticketChannel.id}>.`, ephemeral: true });
+        await modalInteraction.reply({ content: `A new ticket has been created for your request: <#${ticketChannel.id}>. Please follow the instructions sent in this channel. \nThank you very much for trusting us 🧡`, ephemeral: true });
     });
 }
 
