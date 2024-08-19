@@ -113,7 +113,7 @@ async function Rank25_fx(interaction, ticketNumber) {
             .setColor(0x0A9EE9)
             .setTitle('Thank you very much for your order !')
             .addFields(
-                {name: 'How to pay ?', value:`Please send the needed amount (**To define**) with Paypal to this account: **______**.`},
+                {name: 'How to pay ?', value:`Please send the needed amount (**To define**) with Paypal to this email adress: **contactrafbs@gmail.com**.`},
                 {name: 'A booster will handle your request very soon', value: '\u200B', inline: false},
                 {name: '\u200B', value: 'Thanks again for trusting us 🧡'},
             )

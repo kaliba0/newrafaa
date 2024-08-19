@@ -1,112 +1,89 @@
-const { Client, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, PermissionsBitField, ChannelType } = require('discord.js');
-const fs = require('fs');
-const path = require('path');
+const { Client, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, ChannelType, PermissionsBitField } = require('discord.js');
 require('dotenv').config();
+const { startInactivityTimer, handleTicketActivity } = require('./fonctions/tickets/inactiveTicketManager');
 
-// Variables d'environnement
+// Modifications pour le .env
 const token = process.env.TOKEN;
-const guildId = process.env.GUILD_ID;
 const adminRoleId = process.env.ADMIN_ROLE_ID;
 const ticketscatId = process.env.TICKETS_CAT_ID;
+const addFriendChannelId = process.env.ADD_FRIENDS_CHANNEL_ID
 
-// Initialisation du client Discord
-const client = new Client({
-    intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent,
-        GatewayIntentBits.GuildMembers,
-    ]
-});
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
-// Lorsque le client est prêt
 client.once('ready', () => {
-    console.log('/add command available');
+    console.log('/add is available');
 });
 
-// Gestion de la commande /add
+let addFriendsChannelNumber = 0;
+
 client.on('interactionCreate', async interaction => {
     if (interaction.isCommand()) {
         if (interaction.commandName === 'add') {
-            console.log('/add command triggered');
-            // Vérification du rôle admin
-            if (!interaction.member.roles.cache.has(adminRoleId)) {
-                console.log('User does not have the admin role');
-                await interaction.reply({ content: 'You do not have permission to use this command.', ephemeral: true });
+
+            if (interaction.channelId !== addFriendChannelId) {
+                await interaction.reply({ content: 'This command can only be used in the add-friends channel.', ephemeral: true });
                 return;
             }
 
-            // Création de l'embed et du menu déroulant
             const embed = new EmbedBuilder()
                 .setColor('#FFBB00')
                 .addFields(
-                    { name: '🏆 |  Getox => 49k                |                  4€', value: '\u200B'},
-                    { name: '🏆 |  MBS | Yoko => 84k           |                  10€', value: '\u200B'},
-                    { name: '🏆 |  MBS | Alan => 97k           |                  12€', value: '\u200B'},
-                    { name: '🏆 |  SK | Yoshi825 => 86k        |                  25€', value: '\u200B'},
-                    { name: '🏆 |  Mahirusitoo🇧🇷 => 92k       |                  10€', value: '\u200B'},
-                    { name: '🏆 |  Skwaxx => 88k               |                  10€', value: '\u200B'},
-                    { name: '🏆 |  Bolos => 89k                |                  8€', value: '\u200B'},
-                    { name: '🏆 |  Antoñositoo🇧🇷🇧🇷 => 86k     |                  10€', value: '\u200B'},
-                    { name: '🏆 |  Karmaa => 92k               |                  15€', value: '\u200B'},
-                    { name: '🏆 |  mai => 38k                  |                  4€', value: '\u200B'},
-                    { name: '🏆 |  IMB | Shawn => 48k          |                  5€', value: '\u200B'},
-                    { name: '🏆 |  Nes => 100k                 |                  15€', value: '\u200B'},
-                    { name: '🏆 |  Toinoumc => 88k             |                  5€', value: '\u200B'},
-                    { name: '🏆 |  Swift? => 64k               |                  6€', value: '\u200B'},
-                    { name: '🏆 |  ECP | GUGU => 105k          |                  27€', value: '\u200B'},
-                    { name: '🏆 |  Buzko => 21k                |                  12€', value: '\u200B'},
-                    { name: '🏆 |  Prince => 96k               |                  10€', value: '\u200B'},
-                    { name: '🏆 |  Claw => 78k                 |                  5€', value: '\u200B'},
-                    { name: '🏆 |  Neiko => 85k                |                  6€', value: '\u200B'}
+                    { name: '🥉 |  Rafaa => 62k                |                  4€', value: '\u200B'},
+                    { name: '🥉 |  Greg => 78k                  |                  4€', value: '\u200B'},
+                    { name: '🥉 |  Azulist => 72                |                  4€', value: '\u200B'},
+                    { name: '🥉 |  Jumper => 76k             |                  2,50€', value: '\u200B'},
+                    { name: '\u200B', value: '\u200B'},
+                    { name: '🥈 |  ANTOÑOSITOO => 86k           |                  10€', value: '\u200B'},
+                    { name: '🥈 |  CASOS => 89k                          |                  12€', value: '\u200B'},
+                    { name: '🥈 |  TOINOUMC => 88k                  |                  8€', value: '\u200B'},
+                    { name: '\u200B', value: '\u200B'},
+                    { name: '🥇 |  Nanoxx => 90k                   |                  10€', value: '\u200B'},
+                    { name: '🥇 |  Marouane => 82k               |                  10€', value: '\u200B'},
+                    { name: '🥇 |  Karmaa => 92k                  |                  20€', value: '\u200B'},
+                    { name: '🥇 |  Mahirusitoo => 92k           |                  20€', value: '\u200B'},
+                    { name: '\u200B', value: '\u200B'},
+                    { name: '🇫🇷 |  BROSTA => 103k                  |                  12€', value: '\u200B'},
+                    { name: '🇫🇷 |  BILUUX => 110k                   |                  18€', value: '\u200B'},
+                    { name: '🇫🇷 |  ECP|GUGU => 105k             |                  27€', value: '\u200B'}
                 );
 
             const selectMenu = new StringSelectMenuBuilder()
-                .setCustomId('select_player') // Assurez-vous que ce customId est correct
+                .setCustomId('select_player')
                 .setPlaceholder('Choose a player')
                 .addOptions(
-                    { label: 'Getox', value: 'Getox - 49k - 4€' },
-                    { label: 'MBS | Yoko', value: 'MBS | Yoko - 84k - 10€' },
-                    { label: 'MBS | Alan', value: 'MBS | Alan - 97k - 12€' },
-                    { label: 'SK | Yoshi825', value: 'SK | Yoshi825 - 86k - 25€' },
-                    { label: 'Mahirusitoo🇧🇷', value: 'Mahirusitoo🇧🇷 - 92k - 10€' },
-                    { label: 'Skwaxx', value: 'Skwaxx - 88k - 10€' },
-                    { label: 'Bolos', value: 'Bolos - 89k - 8€' },
-                    { label: 'Antoñositoo🇧🇷🇧🇷', value: 'Antoñositoo🇧🇷🇧🇷 - 86k - 10€' },
-                    { label: 'Karmaa', value: 'Karmaa - 92k - 15€' },
-                    { label: 'mai', value: 'mai - 38k - 4€' },
-                    { label: 'IMB | Shawn', value: 'IMB | Shawn - 48k - 5€' },
-                    { label: 'Nes', value: 'Nes - 100k - 15€' },
-                    { label: 'Toinoumc', value: 'Toinoumc - 88k - 5€' },
-                    { label: 'Swift?', value: 'Swift? - 64k - 6€' },
-                    { label: 'ECP | GUGU', value: 'ECP | GUGU - 105k - 27€' },
-                    { label: 'Buzko', value: 'Buzko - 21k - 12€' },
-                    { label: 'Prince', value: 'Prince - 96k - 10€' },
-                    { label: 'Claw', value: 'Claw - 78k - 5€' },
-                    { label: 'Neiko', value: 'Neiko - 85k - 6€' }
+                    { label: 'Rafaa', value: 'Rafaa - 62k - 4€' },
+                    { label: 'Greg', value: 'Greg - 78k - 4€' },
+                    { label: 'Azulist', value: 'Azulist - 72 - 4€' },
+                    { label: 'Jumper', value: 'Jumper - 76k - 2,50€' },
+                    { label: 'ANTOÑOSITOO', value: 'ANTOÑOSITOO - 86k - 10€' },
+                    { label: 'CASOS', value: 'CASOS - 89k - 12€' },
+                    { label: 'TOINOUMC', value: 'TOINOUMC - 88k - 8€' },
+                    { label: 'Nanoxx', value: 'Nanoxx - 90k - 10€' },
+                    { label: 'Marouane', value: 'Marouane - 82k - 10€' },
+                    { label: 'Karmaa', value: 'Karmaa - 92k - 20€' },
+                    { label: 'Mahirusitoo', value: 'Mahirusitoo - 92k - 20€' },
+                    { label: 'BROSTA', value: 'BROSTA - 103k - 12€' },
+                    { label: 'BILUUX', value: 'BILUUX - 110k - 18€' },
+                    { label: 'ECP|GUGU', value: 'ECP|GUGU - 105k - 27€' }
                 );
-            
+
             const row = new ActionRowBuilder().addComponents(selectMenu);
 
-            // Envoi de l'embed et du menu
             await interaction.channel.send({ embeds: [embed], components: [row]});
-
             await interaction.deferReply({ ephemeral: true });
             await interaction.deleteReply();
+
         }
     } else if (interaction.isStringSelectMenu()) {
-        if (interaction.customId === 'select_player') { // Le même customId que défini ci-dessus
+        if (interaction.customId === 'select_player') {
             const selectedValue = interaction.values[0];
-            console.log(`Player selected: ${selectedValue}`);
             const [playerName, playerRank, playerPrice] = selectedValue.split(' - ');
 
-            console.log(`Creating ticket for player: ${playerName}`);
+            // Création du salon textuel pour le ticket dans la catégorie spécifiée
+            addFriendsChannelNumber = addFriendsChannelNumber +1;
             const guild = interaction.guild;
-            const ticketNumber = 0;
-
-            // Création du salon de ticket
             const ticketChannel = await guild.channels.create({
-                name: `add-${ticketNumber+1}`,
+                name: `add-friend-${addFriendsChannelNumber}`,
                 type: ChannelType.GuildText,
                 parent: ticketscatId,
                 permissionOverwrites: [
@@ -133,24 +110,48 @@ client.on('interactionCreate', async interaction => {
                 ],
             });
 
-            // Envoi du récapitulatif dans le salon de ticket
+            console.log('Nouveau salon créé');
+
+            // Création de l'embed pour le récapitulatif
+            const recapEmbed = new EmbedBuilder()
+                .setColor('#FFBB00')
+                .setTitle('Ticket Summary')
+                .setDescription(`You have chosen to add **${playerName}**`)
+                .addFields(
+                    { name: 'Service', value: 'Add Friend', inline: false },
+                    { name: 'Player', value: playerName, inline: true },
+                    { name: 'Trophy', value: playerRank, inline: true },
+                    { name: 'Price', value: playerPrice, inline: true }
+                    
+                );
+
+            // Envoi du message récapitulatif dans le nouveau salon textuel
+            await ticketChannel.send({ embeds: [recapEmbed] });
+
             const paypalEmbed = new EmbedBuilder()
                 .setColor(0x0A9EE9)
-                .setTitle('Ticket Summary')
-                .setDescription(`You have selected **${playerName}**.`)
+                .setTitle('Thank you very much for your order !')
                 .addFields(
-                    {name:'Price:', value: `${playerPrice}`, inline: true},
-                    {name: '\u200B', value:`Please send the needed amount with Paypal to this account: **zenoxbss**`},
-                    {name: 'YOU MUST SEND IT THROUGH "FOR FRIENDS AND FAMILY"', value: '\u200B', inline: false},
-                    {name: 'A booster will handle your request once you sent the money', value: '\u200B', inline: false}
+                    {name: 'How to pay ?', value:`Please send the needed amount (**To define**) with Paypal to this email adress: **contactrafbs@gmail.com**.`},
+                    {name: 'A booster will handle your request very soon', value: '\u200B', inline: false},
+                    {name: '\u200B', value: 'Thanks again for trusting us 🧡'},
                 )
                 .setThumbnail('https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png')
-                .setFooter({ text: 'Thank you very much — Zenox Shop Service <3'})
+                .setFooter({ text: 'Φ RAFAAA STORE Φ'})
             
             await ticketChannel.send({ embeds: [paypalEmbed] });
+            
+            startInactivityTimer(ticketChannel);
 
-            await interaction.reply({ content: `You can follow your request in <#${ticketChannel.id}>.`, ephemeral: true });
+            // Envoi d'un message de confirmation dans le canal original
+            await interaction.reply({ content: `A new ticket has been created for your request: <#${ticketChannel.id}>. Please follow the instructions sent in this channel. \nThank you very much for trusting us 🧡`, ephemeral: true });
         }
+    }
+});
+
+client.on('messageCreate', async message => {
+    if (message.channel.parentId === ticketscatId) {
+        handleTicketActivity(message.channel);
     }
 });
 

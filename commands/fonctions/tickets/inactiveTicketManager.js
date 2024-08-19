@@ -23,7 +23,7 @@ function startInactivityTimer(channel) {
         const warningEmbed = new EmbedBuilder()
             .setColor(0xFF0000)
             .setTitle('Ticket Closure Warning')
-            .setDescription('This ticket has been inactive for 5 days. It will be closed automatically in 1 hour unless there is further activity.');
+            .setDescription('This ticket has been inactive for 3 days. It will be closed automatically in 1 hour unless there is further activity.');
 
         try {
             await channel.send({ embeds: [warningEmbed] });

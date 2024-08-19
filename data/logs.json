@@ -1,37 +1,3 @@
 [
-  {
-    "author": "antterzn",
-    "service": "Ranked Boost",
-    "details": {
-      "actualRank": "2",
-      "wantedRank": "7",
-      "notes": "No additional notes"
-    },
-    "date": "8/13/2024, 4:09:59 PM"
-  },
-  {
-    "author": "antterzn",
-    "service": "Trophy Boost",
-    "details": {
-      "actualTrophy": "12000",
-      "wantedTrophies": "20000",
-      "notes": "No additional notes"
-    },
-    "date": "8/13/2024, 4:19:56 PM"
-  },
-  {
-    "author": "antterzn",
-    "service": "Ranked Boost",
-    "details": {
-      "actualRank": "2",
-      "wantedRank": "7",
-      "notes": "No additional notes"
-    },
-    "date": "8/14/2024, 9:41:39 AM"
-  },
-  {
-    "author": "zenox19.",
-    "service": "Other",
-    "date": "8/17/2024, 10:48:47 PM"
-  }
+  
 ]
