@@ -50,6 +50,12 @@ client.on('interactionCreate', async interaction => {
 
                 // Stocker l'image de manière temporaire
                 client.imageAttachment = image;
+                if (client.imageAttachment) {
+                    console.log("Image correctement stockée:", client.imageAttachment.url);
+                } else {
+                    console.log("Aucune image n'a été stockée.");
+                }
+
             } catch (error) {
                 console.error('Erreur lors de l\'envoi du message avec le bouton:', error);
                 await interaction.reply({ content: 'Une erreur s\'est produite lors de l\'envoi du message.', ephemeral: true });
@@ -133,19 +139,23 @@ client.on('interactionCreate', async interaction => {
                 .setColor('#FF0000')
                 .addFields(
                     { name: ':moneybag: Price', value: `${price}€`, inline: true },
-                    { name: '<:bstrophy:1270087684584640606> Trophies', value: `${trophies} <:bstrophy:1270087684584640606>`, inline: true },
-                    { name: '<:rank35:1270071427315535942> Ranks 35', value: `${rank35}`, inline: true },
-                    { name: '<:rank30:1270071611822968903> Ranks 30', value: `${rank30}`, inline: true }
+                    { name: '<:bstrophy:1275073059400978465> Trophies', value: `${trophies} <:bstrophy:1275073059400978465>`, inline: true },
+                    { name: '<:rank35:1275072588934283345> Ranks 35', value: `${rank35}`, inline: true },
+                    { name: '<:rank30:1275072757792510034> Ranks 30', value: `${rank30}`, inline: true },
                 );
 
             if (description) {
                 embed.setDescription(description);
             }
 
-            if (client.imageAttachment) {
+            if (client.imageAttachment && client.imageAttachment.url) {
+                console.log("URL de l'image utilisée dans l'embed:", client.imageAttachment.url);
                 embed.setImage(client.imageAttachment.url);
                 client.imageAttachment = null;
+            } else {
+                console.log("URL de l'image non utilisée dans l'embed")
             }
+            
 
             const buyButton = new ButtonBuilder()
                 .setCustomId('buyButton')
@@ -168,7 +178,7 @@ client.on('interactionCreate', async interaction => {
 
             await targetChannel.send({ embeds: [embed], components: [row] });
 
-            await interaction.reply({ content: 'Votre récapitulatif a été envoyé dans le salon <#${targetChannel.id}>.', ephemeral: true });
+            await interaction.reply({ content: `Votre récapitulatif a été envoyé dans le salon <#${targetChannel.id}>.`, ephemeral: true });
         } catch (error) {
             console.error('Erreur lors de l\'envoi du récapitulatif:', error);
             await interaction.reply({ content: 'Une erreur s\'est produite lors de l\'envoi du récapitulatif. Veuillez réessayer.', ephemeral: true });
@@ -234,9 +244,9 @@ client.on('interactionCreate', async interaction => {
                 .addFields(
                     { name: 'Service', value: 'Purchase Account', inline: false },
                     { name: ':moneybag: Price', value: interaction.message.embeds[0].fields[0].value, inline: true },
-                    { name: '<:bstrophy:1270087684584640606> Trophies', value: interaction.message.embeds[0].fields[1].value, inline: true },
-                    { name: '<:rank35:1270071427315535942> Ranks 35', value: interaction.message.embeds[0].fields[2].value, inline: true },
-                    { name: '<:rank30:1270071611822968903> Ranks 30', value: interaction.message.embeds[0].fields[3].value, inline: true }
+                    { name: '<:bstrophy:1275073059400978465> Trophies', value: interaction.message.embeds[0].fields[1].value, inline: true },
+                    { name: '<:rank35:1275072588934283345> Ranks 35', value: interaction.message.embeds[0].fields[2].value, inline: true },
+                    { name: '<:rank30:1275072757792510034> Ranks 30', value: interaction.message.embeds[0].fields[3].value, inline: true }
                 );
 
             if (interaction.message.embeds[0].image) {
