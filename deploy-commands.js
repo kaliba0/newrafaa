@@ -26,7 +26,7 @@ const commands = [
                 type: 1, // Type 1 indicates a sub-command
             }
         ]
-    },
+    }, 
     {
         name: 'account',
         description: 'Configure an account',
