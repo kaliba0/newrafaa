@@ -3,6 +3,7 @@ const { startInactivityTimer } = require('./inactiveTicketManager');
 const { logTicket } = require('./logTicket.js');
 const ticketscatId = process.env.TICKETS_CAT_ID;
 const adminRoleId = process.env.ADMIN_ROLE_ID;
+const boosterRoleId = process.env.BOOSTER_ROLE_ID;
 
 async function TrophyBoost_fx(interaction, ticketNumber) {
     const modal = new ModalBuilder()
@@ -96,6 +97,14 @@ async function TrophyBoost_fx(interaction, ticketNumber) {
                 },
                 {
                     id: adminRoleId,
+                    allow: [
+                        PermissionsBitField.Flags.ViewChannel,
+                        PermissionsBitField.Flags.SendMessages,
+                        PermissionsBitField.Flags.ReadMessageHistory
+                    ],
+                },
+                {
+                    id: boosterRoleId,
                     allow: [
                         PermissionsBitField.Flags.ViewChannel,
                         PermissionsBitField.Flags.SendMessages,

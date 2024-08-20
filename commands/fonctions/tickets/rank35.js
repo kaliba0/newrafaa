@@ -3,6 +3,7 @@ const { startInactivityTimer } = require('./inactiveTicketManager');
 const { logTicket } = require('./logTicket.js');
 const ticketscatId = process.env.TICKETS_CAT_ID;
 const adminRoleId = process.env.ADMIN_ROLE_ID;
+const boosterRoleId = process.env.BOOSTER_ROLE_ID;
 
 
 async function Rank35_fx(interaction, ticketNumber) {
@@ -57,7 +58,7 @@ async function Rank35_fx(interaction, ticketNumber) {
 
         if (actualTrophy < 1000) {
             if (actualTrophy <= 850) {
-                finalPrice = 70
+                finalPrice = 100
             }  else if (actualTrophy > 850 && actualTrophy < 1000) {
                 finalPrice = ((1000-actualTrophy)/100)*10+40
             }
@@ -102,6 +103,14 @@ async function Rank35_fx(interaction, ticketNumber) {
                 },
                 {
                     id: adminRoleId,
+                    allow: [
+                        PermissionsBitField.Flags.ViewChannel,
+                        PermissionsBitField.Flags.SendMessages,
+                        PermissionsBitField.Flags.ReadMessageHistory
+                    ],
+                },
+                {
+                    id: boosterRoleId,
                     allow: [
                         PermissionsBitField.Flags.ViewChannel,
                         PermissionsBitField.Flags.SendMessages,
