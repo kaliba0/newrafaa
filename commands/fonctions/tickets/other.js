@@ -37,7 +37,7 @@ async function Other_fx(interaction, ticketNumber) {
 
 
     const embed = new EmbedBuilder()
-        .setColor(0xFE3E2B)
+        .setColor(0xFF000)
         .setTitle('Any questions ❓')
         .setDescription('Ask your questions or report an issue here')
         .setFooter({ 

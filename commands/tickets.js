@@ -45,7 +45,7 @@ client.on('interactionCreate', async interaction => {
             }
 
             const embed = new EmbedBuilder()
-                .setColor(0xFFBB00)
+                .setColor(0xFF0000)
                 .setTitle('Interested in our services?')
                 .setDescription('We sell many things ! To create a ticket, choose what you are interested in!')
                 .setThumbnail('https://logos-world.net/wp-content/uploads/2021/08/Brawl-Stars-Emblem.png')

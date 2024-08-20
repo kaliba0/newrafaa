@@ -18,11 +18,13 @@ async function Rank35_fx(interaction, ticketNumber) {
     const actualRankInput = new TextInputBuilder()
         .setCustomId('actual_rank-input')
         .setLabel('How many trophies do you have on it ?')
+        .setPlaceholder('Please only type the trophies number')
         .setStyle(TextInputStyle.Short);
 
     const powerLevelInput = new TextInputBuilder()
         .setCustomId('power-level-input')
         .setLabel('What is the power level of your brawler ?')
+        .setPlaceholder('Please only type the level number')
         .setStyle(TextInputStyle.Short);
 
     const notesInput = new TextInputBuilder()
@@ -44,9 +46,27 @@ async function Rank35_fx(interaction, ticketNumber) {
         if (!modalInteraction.isModalSubmit() || modalInteraction.customId !== 'brawler-modal') return;
 
         const brawlerName = modalInteraction.fields.getTextInputValue('brawler-input');
-        const actualTrophy = modalInteraction.fields.getTextInputValue('actual_rank-input');
-        const powerLevel = modalInteraction.fields.getTextInputValue('power-level-input');
+        const actualTrophy = parseInt(modalInteraction.fields.getTextInputValue('actual_rank-input'), 10);
+        const powerLevel = parseInt(modalInteraction.fields.getTextInputValue('power-level-input'), 10);
         const notes = modalInteraction.fields.getTextInputValue('notes-input') || 'No additional notes';
+
+
+        let finalPrice
+        let finalTrophies = 1250;
+        let trophiesIncrease = finalTrophies - actualTrophy
+
+        if (actualTrophy < 1000) {
+            if (actualTrophy  >=750 && actualTrophy <= 850) {
+                finalPrice = 18 + 40
+            } else if (actualTrophy < 750) {
+                finalPrice = ((1000-actualTrophy)/100)*8+40
+            } else if (actualTrophy > 850 && actualTrophy < 1000) {
+                finalPrice = ((1000-actualTrophy)/100)*10+40
+            }
+        } else if (actualTrophy >= 1000) {
+            finalPrice = (trophiesIncrease/100)*25
+        }
+
 
         const ticketData = {
             author: interaction.user.username,
@@ -55,7 +75,8 @@ async function Rank35_fx(interaction, ticketNumber) {
                 brawler: brawlerName,
                 trophies: actualTrophy,
                 powerLevel: powerLevel,
-                notes: notes
+                notes: notes,
+                price: finalPrice
             },
             date: new Date().toLocaleString()
         };
@@ -93,15 +114,15 @@ async function Rank35_fx(interaction, ticketNumber) {
         });
 
         const recapEmbed = new EmbedBuilder()
-            .setColor(0xFFBB00)
+            .setColor(0xFF0000)
             .setTitle('Ticket Summary')
             .addFields(
                 { name: 'Brawler', value: brawlerName, inline: true },
-                { name: 'Trophies', value: actualTrophy, inline: true },
-                { name: 'Power', value: powerLevel, inline: true },
+                { name: 'Trophies', value: actualTrophy.toString(), inline: true },
+                { name: 'Power', value: powerLevel.toString(), inline: true },
                 { name: 'Notes', value: notes, inline: true },
                 { name: 'Service', value: 'Boost to rank 35', inline: true },
-                { name: 'Estimated Price :', value: `**To define**`, inline:true},
+                { name: 'Estimated Price :', value: `**${finalPrice}€**`, inline:true},
             )
             .setFooter({ 
                 text: `Ticket opened by ${interaction.user.username} on ${new Date().toLocaleString()}` 
@@ -113,7 +134,7 @@ async function Rank35_fx(interaction, ticketNumber) {
             .setColor(0x0A9EE9)
             .setTitle('Thank you very much for your order !')
             .addFields(
-                {name: 'How to pay ?', value:`Please send the needed amount (**To define**) with Paypal to this email adress: **contactrafbs@gmail.com**.`},
+                {name: 'How to pay ?', value:`Please send the needed amount (**${finalPrice}€**) with Paypal to this email adress: **contactrafbs@gmail.com**.`},
                 {name: 'A booster will handle your request very soon', value: '\u200B', inline: false},
                 {name: '\u200B', value: 'Thanks again for trusting us 🧡'},
             )

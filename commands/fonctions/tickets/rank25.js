@@ -114,7 +114,7 @@ async function Rank25_fx(interaction, ticketNumber) {
         });
 
         const recapEmbed = new EmbedBuilder()
-            .setColor(0xFFBB00)
+            .setColor(0xFF0000)
             .setTitle('Ticket Summary')
             .addFields(
                 { name: 'Brawler', value: brawlerName, inline: true },

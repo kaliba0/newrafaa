@@ -18,6 +18,7 @@ async function Rank30_fx(interaction, ticketNumber) {
     const actualRankInput = new TextInputBuilder()
         .setCustomId('actual_rank-input')
         .setLabel('How many trophies do you have on it ?')
+        .setPlaceholder('Please only type the trophies number')
         .setStyle(TextInputStyle.Short);
 
     const powerLevelInput = new TextInputBuilder()
@@ -32,6 +33,7 @@ async function Rank30_fx(interaction, ticketNumber) {
         .setStyle(TextInputStyle.Paragraph)
         .setRequired(false);
 
+
     const actionRow1 = new ActionRowBuilder().addComponents(brawlerInput);
     const actionRow2 = new ActionRowBuilder().addComponents(actualRankInput);
     const actionRow3 = new ActionRowBuilder().addComponents(powerLevelInput);
@@ -45,18 +47,20 @@ async function Rank30_fx(interaction, ticketNumber) {
         if (!modalInteraction.isModalSubmit() || modalInteraction.customId !== 'brawler-modal') return;
 
         const brawlerName = modalInteraction.fields.getTextInputValue('brawler-input');
-        const actualTrophy = modalInteraction.fields.getTextInputValue('actual_rank-input');
+        const actualTrophy = parseInt(modalInteraction.fields.getTextInputValue('actual_rank-input'), 10);
         const powerLevel = parseInt(modalInteraction.fields.getTextInputValue('power-level-input'), 10);
         const notes = modalInteraction.fields.getTextInputValue('notes-input') || 'No additional notes';
 
         let finalPrice
+        let finalTrophies = 1000;
+        let trophiesIncrease = finalTrophies - actualTrophy
 
-        if (powerLevel <= 9) {
-            finalPrice = 17
-        } else if (powerLevel === 10) {
-            finalPrice = 15
-        } else if (powerLevel === 11){
-            finalPrice = 13
+        if (actualTrophy  >=750 && actualTrophy <= 850) {
+            finalPrice = 18
+        } else if (actualTrophy < 750) {
+            finalPrice = (trophiesIncrease/100)*8
+        } else if (actualTrophy > 850) {
+            finalPrice = (trophiesIncrease/100)*10
         }
 
         const ticketData = {
@@ -105,15 +109,15 @@ async function Rank30_fx(interaction, ticketNumber) {
         });
 
         const recapEmbed = new EmbedBuilder()
-            .setColor(0xFFBB00)
+            .setColor(0xFF0000)
             .setTitle('Ticket Summary')
             .addFields(
                 { name: 'Brawler', value: brawlerName, inline: true },
-                { name: 'Trophies', value: actualTrophy, inline: true },
-                { name: 'Power', value: powerLevel, inline: true },
+                { name: 'Trophies', value: actualTrophy.toString(), inline: true },
+                { name: 'Power', value: powerLevel.toString(), inline: true },
                 { name: 'Notes', value: notes, inline: true },
                 { name: 'Service', value: 'Boost to rank 30', inline: true },
-                { name: 'Estimated Price :', value: `**To define**`, inline:true},
+                { name: 'Estimated Price :', value: `**${finalPrice}€**`, inline:true},
             )
             .setFooter({ 
                 text: `Ticket opened by ${interaction.user.username} on ${new Date().toLocaleString()}` 
@@ -125,7 +129,7 @@ async function Rank30_fx(interaction, ticketNumber) {
             .setColor(0x0A9EE9)
             .setTitle('Thank you very much for your order !')
             .addFields(
-                {name: 'How to pay ?', value:`Please send the needed amount (**To define**) with Paypal to this email adress: **contactrafbs@gmail.com**.`},
+                {name: 'How to pay ?', value:`Please send the needed amount (**${finalPrice}€**) with Paypal to this email adress: **contactrafbs@gmail.com**.`},
                 {name: 'A booster will handle your request very soon', value: '\u200B', inline: false},
                 {name: '\u200B', value: 'Thanks again for trusting us 🧡'},
             )
