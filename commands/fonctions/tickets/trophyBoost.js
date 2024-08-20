@@ -59,7 +59,7 @@ async function TrophyBoost_fx(interaction, ticketNumber) {
             return;
         }
 
-        price = ((newTrophy - actualTrophy)/100) * 5
+        price = ((newTrophy - actualTrophy)/100) * 7
 
 
 

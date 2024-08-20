@@ -56,11 +56,9 @@ async function Rank35_fx(interaction, ticketNumber) {
         let trophiesIncrease = finalTrophies - actualTrophy
 
         if (actualTrophy < 1000) {
-            if (actualTrophy  >=750 && actualTrophy <= 850) {
-                finalPrice = 18 + 40
-            } else if (actualTrophy < 750) {
-                finalPrice = ((1000-actualTrophy)/100)*8+40
-            } else if (actualTrophy > 850 && actualTrophy < 1000) {
+            if (actualTrophy <= 850) {
+                finalPrice = 70
+            }  else if (actualTrophy > 850 && actualTrophy < 1000) {
                 finalPrice = ((1000-actualTrophy)/100)*10+40
             }
         } else if (actualTrophy >= 1000) {
