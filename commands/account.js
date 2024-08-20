@@ -130,7 +130,7 @@ client.on('interactionCreate', async interaction => {
 
             const embed = new EmbedBuilder()
                 .setTitle('‼️ A NEW ACCOUNT IS FOR SALE ‼️')
-                .setColor('#FFBB00')
+                .setColor('#FF0000')
                 .addFields(
                     { name: ':moneybag: Price', value: `${price}€`, inline: true },
                     { name: '<:bstrophy:1270087684584640606> Trophies', value: `${trophies} <:bstrophy:1270087684584640606>`, inline: true },
@@ -228,7 +228,7 @@ client.on('interactionCreate', async interaction => {
             });
 
             const recapEmbed = new EmbedBuilder()
-                .setColor('#FFBB00')
+                .setColor('#FF0000')
                 .setTitle('Ticket Summary')
                 .setDescription(buyer)
                 .addFields(

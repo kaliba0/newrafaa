@@ -33,5 +33,89 @@
       "price": 7
     },
     "date": "8/20/2024, 9:57:07 AM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Boost to rank 30",
+    "details": {
+      "brawler": "Polly",
+      "trophies": 638,
+      "powerLevel": 11,
+      "notes": "No additional notes",
+      "price": 18
+    },
+    "date": "8/20/2024, 3:05:18 PM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Boost to rank 30",
+    "details": {
+      "brawler": "Polly",
+      "trophies": 638,
+      "powerLevel": 11,
+      "notes": "No additional notes",
+      "price": 18
+    },
+    "date": "8/20/2024, 3:06:59 PM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Boost to rank 35",
+    "details": {
+      "brawler": "jacky",
+      "trophies": 840,
+      "powerLevel": 10,
+      "notes": "No additional notes",
+      "price": 68
+    },
+    "date": "8/20/2024, 3:21:18 PM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Boost to rank 35",
+    "details": {
+      "brawler": "jacky",
+      "trophies": 840,
+      "powerLevel": 10,
+      "notes": "No additional notes",
+      "price": 68
+    },
+    "date": "8/20/2024, 3:22:26 PM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Boost to rank 35",
+    "details": {
+      "brawler": "polly",
+      "trophies": 970,
+      "powerLevel": 11,
+      "notes": "No additional notes",
+      "price": 68
+    },
+    "date": "8/20/2024, 3:23:10 PM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Boost to rank 35",
+    "details": {
+      "brawler": "bull",
+      "trophies": 970,
+      "powerLevel": 10,
+      "notes": "No additional notes",
+      "price": 53
+    },
+    "date": "8/20/2024, 3:24:37 PM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Boost to rank 35",
+    "details": {
+      "brawler": "edgar",
+      "trophies": 1010,
+      "powerLevel": 11,
+      "notes": "No additional notes",
+      "price": 60
+    },
+    "date": "8/20/2024, 3:25:43 PM"
   }
 ]

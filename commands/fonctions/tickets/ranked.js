@@ -145,7 +145,7 @@ async function Ranked_fx(interaction, ticketNumber) {
         });
 
         const recapEmbed = new EmbedBuilder()
-            .setColor(0xFFBB00)
+            .setColor(0xFF0000)
             .setTitle('Ticket Summary')
             .addFields(
                 { name: 'Actual Rank', value: actualRankedName, inline: true },

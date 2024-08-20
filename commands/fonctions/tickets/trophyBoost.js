@@ -106,7 +106,7 @@ async function TrophyBoost_fx(interaction, ticketNumber) {
         });
 
         const recapEmbed = new EmbedBuilder()
-            .setColor(0xFFBB00)
+            .setColor(0xFF0000)
             .setTitle('Ticket Summary')
             .addFields(
                 { name: 'Actual Trophies', value: actualTrophy, inline: true },

@@ -26,7 +26,7 @@ client.on('interactionCreate', async interaction => {
             }
 
             const embed = new EmbedBuilder()
-                .setColor('#FFBB00')
+                .setColor('#FF0000')
                 .addFields(
                     { name: '🥉 |  Rafaa => 62k                |                  4€', value: '\u200B'},
                     { name: '🥉 |  Greg => 78k                  |                  4€', value: '\u200B'},
@@ -114,7 +114,7 @@ client.on('interactionCreate', async interaction => {
 
             // Création de l'embed pour le récapitulatif
             const recapEmbed = new EmbedBuilder()
-                .setColor('#FFBB00')
+                .setColor('#FF0000')
                 .setTitle('Ticket Summary')
                 .setDescription(`You have chosen to add **${playerName}**`)
                 .addFields(
