@@ -63,10 +63,11 @@ async function Ranked_fx(interaction, ticketNumber) {
             return;
         };
 
-        price = 10 * (newRanked - actualRanked);
         if ((actualRanked === '1' || actualRanked === '2' || actualRanked === '3' || actualRanked === '4') && newRanked === '7') {
             price = 35;
-        }        
+        } else {
+            price = 10 * (newRanked - actualRanked);
+        }      
 
         // Utilisation correcte des conditions if/else if pour les rangs
         if (actualRanked === '1') {
