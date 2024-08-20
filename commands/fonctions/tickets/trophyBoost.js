@@ -18,7 +18,7 @@ async function TrophyBoost_fx(interaction, ticketNumber) {
     const newTrophyInput = new TextInputBuilder()
         .setCustomId('new_trophy-input')
         .setLabel('How many trophies do you want ?')
-        .setPlaceholder('Please just type the number of trophy you want')
+        .setPlaceholder('Please just type the number of trophies you want')
         .setStyle(TextInputStyle.Short);
 
     const notesInput = new TextInputBuilder()

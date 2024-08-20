@@ -23,6 +23,7 @@ async function Rank30_fx(interaction, ticketNumber) {
     const powerLevelInput = new TextInputBuilder()
         .setCustomId('power-level-input')
         .setLabel('What is the power level of your brawler ?')
+        .setPlaceholder('Please only type the level number')
         .setStyle(TextInputStyle.Short);
 
     const notesInput = new TextInputBuilder()
@@ -45,8 +46,18 @@ async function Rank30_fx(interaction, ticketNumber) {
 
         const brawlerName = modalInteraction.fields.getTextInputValue('brawler-input');
         const actualTrophy = modalInteraction.fields.getTextInputValue('actual_rank-input');
-        const powerLevel = modalInteraction.fields.getTextInputValue('power-level-input');
+        const powerLevel = parseInt(modalInteraction.fields.getTextInputValue('power-level-input'), 10);
         const notes = modalInteraction.fields.getTextInputValue('notes-input') || 'No additional notes';
+
+        let finalPrice
+
+        if (powerLevel <= 9) {
+            finalPrice = 17
+        } else if (powerLevel === 10) {
+            finalPrice = 15
+        } else if (powerLevel === 11){
+            finalPrice = 13
+        }
 
         const ticketData = {
             author: interaction.user.username,
@@ -55,7 +66,8 @@ async function Rank30_fx(interaction, ticketNumber) {
                 brawler: brawlerName,
                 trophies: actualTrophy,
                 powerLevel: powerLevel,
-                notes: notes
+                notes: notes,
+                price: finalPrice
             },
             date: new Date().toLocaleString()
         };
