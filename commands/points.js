@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const token = process.env.TOKEN;
+const ticketChannelId = process.env.TICKET_CHANNEL_ID;
 const membersPath = path.join(process.cwd(), 'data', 'members.json');
 
 const client = new Client({
@@ -39,14 +40,16 @@ client.on('interactionCreate', async interaction => {
         if (member) {
             const fidelityPoints = member.fidelity_points || 0;
 
-            // Créer un embed pour afficher les points de fidélité
-            const embed = new EmbedBuilder()
-                .setColor(0xFFD700)
-                .setTitle('Fidelity Points')
-                .setDescription(`You have **${fidelityPoints}** fidelity points.`)
-                .setFooter({ text: 'Thank you for your loyalty!' });
+            if (fidelityPoints === 0) {
+                // Créer un embed pour afficher les points de fidélité
+                const embed = new EmbedBuilder()
+                    .setColor(0xFFD700)
+                    .setTitle('Fidelity Points')
+                    .setDescription(`You have **${fidelityPoints}** fidelity points. You earn fidelity points when you buy something in this shop ! Take a look in <#${ticketChannelId}>`)
+                    .setFooter({ text: 'Thank you for your loyalty!' });
 
-            await interaction.reply({ embeds: [embed], ephemeral: true });
+                await interaction.reply({ embeds: [embed], ephemeral: true });
+            }
         } else {
             await interaction.reply({ content: 'No fidelity points found for your account.', ephemeral: true });
         }

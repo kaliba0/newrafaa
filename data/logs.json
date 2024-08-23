@@ -10,5 +10,173 @@
       "notes": "notes test"
     },
     "date": "8/23/2024, 12:23:56 PM"
+  },
+  {
+    "author": "4nt01n",
+    "service": "Boost to rank 35",
+    "details": {
+      "brawler": "test",
+      "trophies": 900,
+      "powerLevel": 10,
+      "notes": "No additional notes",
+      "price": 50
+    },
+    "date": "8/23/2024, 1:21:36 PM"
+  },
+  {
+    "author": "4nt01n",
+    "service": "Boost to rank 25",
+    "details": {
+      "brawler": "Penny",
+      "trophies": 600,
+      "powerLevel": 11,
+      "notes": "No additional notes",
+      "price": 7.5
+    },
+    "date": "8/23/2024, 1:23:21 PM"
+  },
+  {
+    "author": "4nt01n",
+    "service": "Boost to rank 25",
+    "details": {
+      "brawler": "Penny",
+      "trophies": 600,
+      "powerLevel": 10,
+      "notes": "No additional notes",
+      "price": 9
+    },
+    "date": "8/23/2024, 1:31:05 PM"
+  },
+  {
+    "author": "4nt01n",
+    "service": "Boost to rank 30",
+    "details": {
+      "brawler": "Penny",
+      "trophies": 600,
+      "powerLevel": 10,
+      "notes": "No additional notes",
+      "price": 32
+    },
+    "date": "8/23/2024, 1:35:29 PM"
+  },
+  {
+    "author": "4nt01n",
+    "service": "Boost to rank 35",
+    "details": {
+      "brawler": "Penny",
+      "trophies": 100,
+      "powerLevel": 10,
+      "notes": "No additional notes",
+      "price": 100
+    },
+    "date": "8/23/2024, 1:36:58 PM"
+  },
+  {
+    "author": "4nt01n",
+    "service": "Boost to rank 30",
+    "details": {
+      "brawler": "test",
+      "trophies": 500,
+      "powerLevel": 10,
+      "notes": "No additional notes",
+      "price": 40
+    },
+    "date": "8/23/2024, 1:41:14 PM"
+  },
+  {
+    "author": "4nt01n",
+    "service": "Boost to rank 35",
+    "details": {
+      "brawler": "test",
+      "trophies": 200,
+      "powerLevel": 11,
+      "notes": "No additional notes",
+      "price": 100
+    },
+    "date": "8/23/2024, 1:42:45 PM"
+  },
+  {
+    "author": "4nt01n",
+    "service": "Boost to rank 30",
+    "details": {
+      "brawler": "0",
+      "trophies": 0,
+      "powerLevel": 0,
+      "notes": "No additional notes",
+      "price": 80
+    },
+    "date": "8/23/2024, 1:48:53 PM"
+  },
+  {
+    "author": "4nt01n",
+    "service": "Boost to rank 25",
+    "details": {
+      "brawler": "0",
+      "trophies": 0,
+      "powerLevel": 0,
+      "notes": "0",
+      "price": 52.5
+    },
+    "date": "8/23/2024, 1:50:00 PM"
+  },
+  {
+    "author": "4nt01n",
+    "service": "Boost to rank 35",
+    "details": {
+      "brawler": "0",
+      "trophies": 600,
+      "powerLevel": 10,
+      "notes": "No additional notes",
+      "price": 100
+    },
+    "date": "8/23/2024, 2:01:55 PM"
+  },
+  {
+    "author": "4nt01n",
+    "service": "Boost to rank 25",
+    "details": {
+      "brawler": "0",
+      "trophies": 0,
+      "powerLevel": 0,
+      "notes": "No additional notes",
+      "price": 52.5
+    },
+    "date": "8/23/2024, 2:21:16 PM"
+  },
+  {
+    "author": "4nt01n",
+    "service": "Boost to rank 25",
+    "details": {
+      "brawler": "0",
+      "trophies": 0,
+      "powerLevel": 0,
+      "notes": "No additional notes",
+      "price": 52.5
+    },
+    "date": "8/23/2024, 2:22:50 PM"
+  },
+  {
+    "author": "4nt01n",
+    "service": "Boost to rank 35",
+    "details": {
+      "brawler": "Penny",
+      "trophies": 600,
+      "powerLevel": 10,
+      "notes": "No additional notes",
+      "price": 78
+    },
+    "date": "8/23/2024, 2:34:28 PM"
+  },
+  {
+    "author": "4nt01n",
+    "service": "Custom Boost",
+    "details": {
+      "rank25": "zifhzof",
+      "rank30": "pefihv",
+      "rank35": "efpvih",
+      "ranked": "pzifvh",
+      "notes": "No additional notes"
+    },
+    "date": "8/23/2024, 3:20:45 PM"
   }
 ]

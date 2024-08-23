@@ -31,6 +31,9 @@ const client = new Client({
 let ticketNumber = 25; 
 let boostType = "";
 
+// Map pour stocker les propriétaires de tickets par ID de salon
+const ticketOwners = new Map();
+
 client.once('ready', () => {
     console.log('/tickets is available!');
 });
@@ -100,62 +103,77 @@ client.on('interactionCreate', async interaction => {
             await interaction.deleteReply();
 
         } else if (interaction.commandName === 'ticket' && interaction.options.getSubcommand() === 'close') {
-            // Vérifiez si l'utilisateur a le rôle admin
             if (!interaction.member.roles.cache.has(adminRoleId)) {
                 await interaction.reply({ content: 'You do not have the required permissions to use this command.', ephemeral: true });
                 return;
             }
 
-            // Vérifiez si le salon est un salon de tickets
             if (interaction.channel.parentId !== ticketscatId && interaction.channel.parentId !== accountsCatId) {
                 await interaction.reply({ content: 'This command can only be used in a ticket channel.', ephemeral: true });
                 return;
             }
 
-            const yesBtn = new ButtonBuilder()
-                .setCustomId('distribute_points_yes')
-                .setLabel('Yes')
-                .setStyle(ButtonStyle.Success);
+            if (boostType === 'rank25' || boostType === 'rank30' || boostType === 'rank35') {
+                const yesBtn = new ButtonBuilder()
+                    .setCustomId('distribute_points_yes')
+                    .setLabel('Yes')
+                    .setStyle(ButtonStyle.Success);
 
-            const noBtn = new ButtonBuilder()
-                .setCustomId('distribute_points_no')
-                .setLabel('No')
-                .setStyle(ButtonStyle.Danger);
+                const noBtn = new ButtonBuilder()
+                    .setCustomId('distribute_points_no')
+                    .setLabel('No')
+                    .setStyle(ButtonStyle.Danger);
 
-            const row = new ActionRowBuilder().addComponents(yesBtn, noBtn);
+                const row = new ActionRowBuilder().addComponents(yesBtn, noBtn);
 
-            await interaction.reply({ content: 'Do you want to distribute the fidelity points for this boost ?', components: [row], ephemeral: true });
+                await interaction.reply({ content: 'Do you want to distribute the fidelity points for this boost ?', components: [row], ephemeral: true });
 
+            } else {
+                try {
+                    await interaction.reply({ content: 'This ticket will be closed and the channel will be deleted.', ephemeral: true });
+                    await interaction.channel.delete();
+                } catch (error) {
+                    console.error('Error while deleting the channel:', error);
+                    await interaction.reply({ content: 'There was an error trying to close this ticket.', ephemeral: true });
+                }
+            }
         }
     } else if (interaction.isStringSelectMenu()) {
         if (interaction.customId === 'select-service') {
             if (interaction.values && interaction.values.length > 0) {
+                let createdChannel;
                 switch (interaction.values[0]) {
                     case 'rank25':
-                        Rank25_fx(interaction, ticketNumber++);
-                        boostType = 'rank25'
+                        createdChannel = await Rank25_fx(interaction, ticketNumber++);
+                        boostType = 'rank25';
                         break;
                     case 'rank30':
-                        Rank30_fx(interaction, ticketNumber++);
-                        boostType = 'rank30'
+                        createdChannel = await Rank30_fx(interaction, ticketNumber++);
+                        boostType = 'rank30';
                         break;
                     case 'rank35':
-                        Rank35_fx(interaction, ticketNumber++);
-                        boostType = 'rank35'
+                        createdChannel = await Rank35_fx(interaction, ticketNumber++);
+                        boostType = 'rank35';
                         break;
                     case 'ranked':
-                        Ranked_fx(interaction, ticketNumber++);
+                        createdChannel = await Ranked_fx(interaction, ticketNumber++);
                         break;
                     case 'custom_order':
-                        CustomOrder_fx(interaction, ticketNumber++);
+                        createdChannel = await CustomOrder_fx(interaction, ticketNumber++);
                         break;
                     default:
-                        Other_fx(interaction, ticketNumber++);
+                        createdChannel = await Other_fx(interaction, ticketNumber++);
                         console.log('other');
                         break;
                 }
+
+                // Enregistrez l'ID du salon nouvellement créé et l'utilisateur qui a ouvert le ticket
+                if (createdChannel) {
+                    console.log(`Enregistrement du ticket: ${createdChannel.id} pour l'utilisateur: ${interaction.user.id}`);
+                    ticketOwners.set(createdChannel.id, interaction.user.id);
+                }
             } else {
-                await interaction.reply({ content: 'No service selected.', ephemeral: true });
+                await interaction.editReply({ content: 'No service selected.', ephemeral: true });
             }
         }
     } else if (interaction.isButton()) {
@@ -163,7 +181,6 @@ client.on('interactionCreate', async interaction => {
         let points = 0;
 
         if (interaction.customId === 'distribute_points_yes') {
-            
             if (boostType === 'rank25') {
                 points = 3;
             } else if (boostType === 'rank30') {
@@ -172,10 +189,15 @@ client.on('interactionCreate', async interaction => {
                 points = 5;
             }
 
-            // Ajoute les points de fidélité à l'utilisateur
-            addFidelityPoints(interaction.user.id, points);
+            const userId = ticketOwners.get(interaction.channel.id);
 
-            await interaction.editReply({ content: `Added ${points} fidelity points to ${interaction.user.tag}.`, components: [] });
+            if (userId) {
+                addFidelityPoints(userId, points);
+                await interaction.editReply({ content: `Added ${points} fidelity points to the user.`, ephemeral:true });
+            } else {
+                await interaction.editReply({ content: 'Error: Could not find the user who opened the ticket.', ephemeral:true });
+            }
+
             try {
                 await interaction.followUp({ content: 'This ticket will be closed and the channel will be deleted.', ephemeral: true });
                 await interaction.channel.delete();
@@ -183,7 +205,6 @@ client.on('interactionCreate', async interaction => {
                 console.error('Error while deleting the channel:', error);
                 await interaction.followUp({ content: 'There was an error trying to close this ticket.', ephemeral: true });
             }
-            // Vous pouvez ensuite fermer le ticket ou ajouter d'autres logiques ici
 
         } else if (interaction.customId === 'distribute_points_no') {
             await interaction.editReply({ content: 'No fidelity points were distributed.', components: [] });
@@ -195,7 +216,6 @@ client.on('interactionCreate', async interaction => {
                 console.error('Error while deleting the channel:', error);
                 await interaction.followUp({ content: 'There was an error trying to close this ticket.', ephemeral: true });
             }
-            // Vous pouvez ensuite fermer le ticket ou ajouter d'autres logiques ici
         }
     }
 });

@@ -11,12 +11,12 @@ const commands = [
     {
         name: 'tickets',
         description: 'Create a new ticket',
-        default_member_permissions: `0`, // Commande invisible pour tous sauf admins
+        default_member_permissions: `0`,
     },
     {
         name: 'add',
         description: 'Add a player',
-        default_member_permissions: `0`, // Commande invisible pour tous sauf admins
+        default_member_permissions: `0`,
     },
     {
         name: 'ticket',
@@ -28,7 +28,7 @@ const commands = [
                 type: 1, // Type 1 indicates a sub-command
             }
         ],
-        default_member_permissions: `0`, // Commande invisible pour tous sauf admins
+        default_member_permissions: `0`,
     },
     {
         name: 'account',
@@ -41,17 +41,36 @@ const commands = [
                 required: false
             }
         ],
-        default_member_permissions: `0`, // Commande invisible pour tous sauf admins
+        default_member_permissions: `0`,
     },
     {
         name: 'clear',
         description: 'Clear all messages in the channel',
-        default_member_permissions: `0`, // Commande invisible pour tous sauf admins
+        default_member_permissions: `0`,
     },
     {
         name: 'points',
         description: 'See how many fidelity points you have',
         // Pas de restrictions, donc accessible à tous les membres
+    },
+    {
+        name: 'add-points',
+        description: 'Add some fidelity points to a player',
+        options: [
+            {
+                name: 'user',
+                description: 'Select the user to whom you want to add points',
+                type: 6, // Type 6 indicates a user mention
+                required: true,
+            },
+            {
+                name: 'nb',
+                description: 'Number of points to add',
+                type: 4, // Type 4 indicates an integer
+                required: true,
+            }
+        ],
+        default_member_permissions: `0`, // Commande invisible pour tous sauf admins
     }
 ];
 

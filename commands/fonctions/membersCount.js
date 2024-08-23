@@ -40,7 +40,7 @@ function updateMembersFile(guild) {
 }
 
 // Fonction pour ajouter des points de fidélité
-function addFidelityPoints(userId, points) {
+function addFidelityPoints(userId, points, interaction) {
     // Lire le fichier members.json
     const membersData = JSON.parse(fs.readFileSync(membersPath, 'utf-8'));
 
@@ -56,6 +56,8 @@ function addFidelityPoints(userId, points) {
         console.log(`Ajouté ${points} points de fidélité à l'utilisateur ${member.username}. Total : ${member.fidelity_points}`);
     } else {
         console.error(`Utilisateur avec ID ${userId} non trouvé dans le fichier members.json`);
+        interaction.editReply({content: `The memeber ID hasn\'t been registered (the ticket has been created before the fidelity points implementation. Try add manually the fidelity points with the /add-points command.`});
+            
     }
 }
 
