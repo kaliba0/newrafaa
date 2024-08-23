@@ -127,7 +127,7 @@ async function Rank25_fx(interaction, ticketNumber) {
             .setTitle('Ticket Summary')
             .addFields(
                 { name: 'Brawler', value: brawlerName, inline: true },
-                { name: 'Trophies', value: actualTrophy, inline: true },
+                { name: 'Trophies', value: actualTrophy.toString(), inline: true },
                 { name: 'Power', value: powerLevel.toString(), inline: true },
                 { name: 'Notes', value: notes, inline: true },
                 { name: 'Service', value: 'Boost to rank 25', inline: true },
