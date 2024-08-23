@@ -22,7 +22,7 @@ async function Ranked_fx(interaction, ticketNumber) {
     const newRankedInput = new TextInputBuilder()
         .setCustomId('new_ranked-input')
         .setLabel('What rank would you like to have ?')
-        .setPlaceholder('... Mythic(5) ; Legendary(6) ; Master(6)')
+        .setPlaceholder('... Mythic(5) ; Legendary(6) ; Master(7)')
         .setStyle(TextInputStyle.Short);
 
     const notesInput = new TextInputBuilder()

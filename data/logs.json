@@ -1,3 +1,14 @@
 [
-  
+  {
+    "author": "antterzn",
+    "service": "Custom Boost",
+    "details": {
+      "rank25": "test",
+      "rank30": "test2",
+      "rank35": "N/A",
+      "ranked": "tested",
+      "notes": "notes test"
+    },
+    "date": "8/23/2024, 12:23:56 PM"
+  }
 ]
