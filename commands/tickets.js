@@ -8,6 +8,7 @@ const { Rank30_fx } = require('./fonctions/tickets/rank30');
 const { Rank35_fx } = require('./fonctions/tickets/rank35');
 const { Ranked_fx } = require('./fonctions/tickets/ranked');
 const { TrophyBoost_fx } = require('./fonctions/tickets/trophyBoost');
+const { CustomOrder_fx } = require('./fonctions/tickets/custom_order');
 const { Other_fx } = require('./fonctions/tickets/other');
 const { addFidelityPoints } = require('./fonctions/membersCount'); // Import de la fonction pour ajouter des points
 
@@ -16,6 +17,7 @@ const token = process.env.TOKEN;
 const adminRoleId = process.env.ADMIN_ROLE_ID;
 const ticketscatId = process.env.TICKETS_CAT_ID;
 const ticketChannelId = process.env.TICKET_CHANNEL_ID;
+const accountsCatId = process.env.ACCOUNTS_CAT_ID;
 
 const client = new Client({
     intents: [
@@ -26,7 +28,7 @@ const client = new Client({
     ]
 });
 
-let ticketNumber = 0; 
+let ticketNumber = 25; 
 let boostType = "";
 
 client.once('ready', () => {
@@ -59,33 +61,28 @@ client.on('interactionCreate', async interaction => {
                 .addOptions([
                     {
                         label: 'Rank 25',
-                        description: 'Get a brawler boosted to rank 25',
                         value: 'rank25',
                         emoji: '1275072531920982127',
                     },
                     {
                         label: 'Rank 30',
-                        description: 'Get a brawler boosted to rank 30',
                         value: 'rank30',
                         emoji: '1275072757792510034',
                     },
                     {
                         label: 'Rank 35',
-                        description: 'Get a brawler boosted to rank 35',
                         value: 'rank35',
                         emoji: '1275072588934283345',
                     },
                     {
-                        label: 'Ranked',
-                        description:'Upgrade your rank',
-                        emoji: '1275072840999112776',
-                        value: 'ranked',
+                        label: 'Custom Order',
+                        emoji: '1275073059400978465',
+                        value: 'custom_order',
                     },
                     {
-                        label: 'Trophy Boost',
-                        description: 'Increase your trophy number',
-                        emoji: '1275073059400978465',
-                        value: 'trophy_boost',
+                        label: 'Ranked',
+                        emoji: '1275072840999112776',
+                        value: 'ranked',
                     },
                     {
                         label: 'Other',
@@ -110,7 +107,7 @@ client.on('interactionCreate', async interaction => {
             }
 
             // Vérifiez si le salon est un salon de tickets
-            if (interaction.channel.parentId !== ticketscatId) {
+            if (interaction.channel.parentId !== ticketscatId && interaction.channel.parentId !== accountsCatId) {
                 await interaction.reply({ content: 'This command can only be used in a ticket channel.', ephemeral: true });
                 return;
             }
@@ -149,8 +146,8 @@ client.on('interactionCreate', async interaction => {
                     case 'ranked':
                         Ranked_fx(interaction, ticketNumber++);
                         break;
-                    case 'trophy_boost':
-                        TrophyBoost_fx(interaction, ticketNumber++);
+                    case 'custom_order':
+                        CustomOrder_fx(interaction, ticketNumber++);
                         break;
                     default:
                         Other_fx(interaction, ticketNumber++);
