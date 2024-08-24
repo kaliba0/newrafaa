@@ -178,5 +178,17 @@
       "notes": "No additional notes"
     },
     "date": "8/23/2024, 3:20:45 PM"
+  },
+  {
+    "author": "4nt01n",
+    "service": "Boost to rank 30",
+    "details": {
+      "brawler": "test",
+      "trophies": 0,
+      "powerLevel": null,
+      "notes": "No additional notes",
+      "price": 80
+    },
+    "date": "8/24/2024, 11:27:31 AM"
   }
 ]

@@ -51,7 +51,14 @@ const commands = [
     {
         name: 'points',
         description: 'See how many fidelity points you have',
-        // Pas de restrictions, donc accessible à tous les membres
+        options: [
+            {
+                name: 'user',
+                description: 'Select the user to see their fidelity points',
+                type: 6, // Type 6 indicates a user mention
+                required: false,
+            }
+        ],
     },
     {
         name: 'add-points',
