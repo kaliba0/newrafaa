@@ -4,6 +4,8 @@
 // require('./commands/add.js');
 // require('./commands/account.js');
 
+require('./deploy-commands.js');
 require('./commands/tickets.js');
 require('./commands/fonctions/membersCount.js');
 require('./commands/points.js');
+require('./commands/add-points.js');
