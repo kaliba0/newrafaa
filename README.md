@@ -1,4 +1,4 @@
-# Bot Discord.js pour Zenoxx
+# Bot Discord.js pour Rafaa
 
 
 ## Présentation du bot 
