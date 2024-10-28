@@ -14,8 +14,8 @@ const commands = [
         default_member_permissions: `0`,
     },
     {
-        name: 'add',
-        description: 'Add a player',
+        name: 'tos',
+        description: 'Show the Terms Of Sales',
         default_member_permissions: `0`,
     },
     {
@@ -25,20 +25,7 @@ const commands = [
             {
                 name: 'close',
                 description: 'Close a ticket',
-                type: 1, // Type 1 indicates a sub-command
-            }
-        ],
-        default_member_permissions: `0`,
-    },
-    {
-        name: 'account',
-        description: 'Configure an account',
-        options: [
-            {
-                name : 'image',
-                description: 'Upload an image',
-                type: 11, // Type 11 indicates an attachment
-                required: false
+                type: 1,
             }
         ],
         default_member_permissions: `0`,
@@ -47,37 +34,6 @@ const commands = [
         name: 'clear',
         description: 'Clear all messages in the channel',
         default_member_permissions: `0`,
-    },
-    {
-        name: 'points',
-        description: 'See how many fidelity points you have',
-        options: [
-            {
-                name: 'user',
-                description: 'Select the user to see their fidelity points',
-                type: 6, // Type 6 indicates a user mention
-                required: false,
-            }
-        ],
-    },
-    {
-        name: 'add-points',
-        description: 'Add some fidelity points to a player',
-        options: [
-            {
-                name: 'user',
-                description: 'Select the user to whom you want to add points',
-                type: 6, // Type 6 indicates a user mention
-                required: true,
-            },
-            {
-                name: 'nb',
-                description: 'Number of points to add',
-                type: 4, // Type 4 indicates an integer
-                required: true,
-            }
-        ],
-        default_member_permissions: `0`, // Commande invisible pour tous sauf admins
     }
 ];
 

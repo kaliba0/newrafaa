@@ -1,0 +1,25 @@
+{
+  "name": "newrafaa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaliba0/newrafaa.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaliba0/newrafaa/issues"
+  },
+  "homepage": "https://github.com/kaliba0/newrafaa#readme",
+  "dependencies": {
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.5",
+    "mysql2": "^3.11.3"
+  }
+}

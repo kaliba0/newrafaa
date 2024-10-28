@@ -190,5 +190,106 @@
       "price": 80
     },
     "date": "8/24/2024, 11:27:31 AM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Boost to rank 35",
+    "details": {
+      "brawler": "jlohljh",
+      "trophies": 5000,
+      "powerLevel": 10,
+      "notes": "No additional notes",
+      "price": -562.5
+    },
+    "date": "10/28/2024, 11:01:22 PM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Buy an account",
+    "details": {
+      "notes": "the best one"
+    },
+    "date": "10/28/2024, 11:03:47 PM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Sell an account",
+    "details": {
+      "trophies": 50000,
+      "notes": "lkhlkjh"
+    },
+    "date": "10/28/2024, 11:04:44 PM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Sell an account",
+    "details": {
+      "trophies": null,
+      "notes": "No additional notes"
+    },
+    "date": "10/28/2024, 11:05:12 PM"
+  },
+  {
+    "author": "4nt01n",
+    "service": "Sell an account",
+    "details": {
+      "trophies": null,
+      "notes": "ze"
+    },
+    "date": "10/28/2024, 11:07:39 PM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Buy an account",
+    "details": {
+      "notes": "'(-u'-u"
+    },
+    "date": "10/28/2024, 11:09:17 PM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Buy an account",
+    "details": {
+      "notes": "tn,yh"
+    },
+    "date": "10/28/2024, 11:12:40 PM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Boost to rank 30",
+    "details": {
+      "brawler": "zey",
+      "trophies": null,
+      "powerLevel": null,
+      "notes": "z"
+    },
+    "date": "10/28/2024, 11:15:07 PM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Sell an account",
+    "details": {
+      "trophies": null,
+      "notes": "zedfg"
+    },
+    "date": "10/28/2024, 11:16:12 PM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Buy an account",
+    "details": {
+      "notes": "aezf"
+    },
+    "date": "10/28/2024, 11:17:51 PM"
+  },
+  {
+    "author": "antterzn",
+    "service": "Ranked Boost",
+    "details": {
+      "actualRank": "1",
+      "wantedRank": "7",
+      "notes": "No additional notes"
+    },
+    "date": "10/28/2024, 11:19:17 PM"
   }
 ]
