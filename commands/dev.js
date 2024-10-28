@@ -2,17 +2,9 @@ const { Client, GatewayIntentBits, EmbedBuilder } = require('discord.js');
 require('dotenv').config();
 
 // Modifications pour le .env
-const token = process.env.TOKEN;
-const guildId = process.env.GUILD_ID;
-const clientId = process.env.CLIENT_ID;
+const token = process.env.TOKEN
 const adminRoleId = process.env.ADMIN_ROLE_ID;
-const ticketscatId = process.env.TICKETS_CAT_ID;
-const accountChannelId = process.env.ACCOUNT_CHANNEL_ID;
-const addAccountChannelId = process.env.ADD_ACCOUNT_CHANNEL_ID;
-const addFriendChannelId = process.env.ADD_FRIEND_CHANNEL_ID;
-const ticketChannelId = process.env.TICKET_CHANNEL_ID;
 const devChannelId = process.env.DEV_CHANNEL_ID;
-const antterznUserId = process.env.ANTTERZN_ID;
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
@@ -23,28 +15,29 @@ client.once('ready', () => {
 client.on('interactionCreate', async interaction => {
     if (interaction.isCommand()) {
         if (interaction.commandName === 'dev') {
-            await interaction.reply({ content: 'Your request is being sent', ephemeral: true });
+            
+            if (!interaction.member.roles.cache.has(adminRoleId)) {
+                await interaction.reply({ content: 'You do not have the required permissions to use this command.', ephemeral: true });
+                return;
+            }
 
             const embed = new EmbedBuilder()
                 .setColor('#006CFF')
-                .setTitle('Need a developer for something?')
-                .setDescription(`You need to develop a website, or a mobile app or anything? I'm a young developer and I'm looking for some missions. I know a few programming languages but you can ask me everything because I learn fast.`)
+                .setTitle('Looking for a Developer to Bring Your Ideas to Life?')
+                .setDescription(`I'm a young, passionate developer, constantly improving my skills and ready to take on new challenges. Whether you need a website, a mobile app, or a unique software solution, I'm here to make it happen! My learning curve is steep, and I'm eager to dive into new projects with enthusiasm.`)
                 .addFields(
-                    { name: 'My languages:', value: 'Python, HTML | CSS, JavaScript (with APIs like discord.js), Swift, Hardware (Arduino) and many others' },
-                    { name: 'How to contact me', value: `You can contact me via the <#${devChannelId}> channel, or you can send a private message to <@${antterznUserId}>. You can also send me an email to aterzn@gmail.com.` }
+                    { name: 'My Languages and Skills:', value: 'I have experience with Python, HTML | CSS, JavaScript (especially with Discord.js), Swift for iOS, and hardware programming with Arduino. I’m quick to pick up new languages and technologies to meet project needs.' },
+                    { name: 'Why Choose Me?', value: 'With a knack for problem-solving and a love for technology, I approach each project with fresh ideas and a tailored approach to bring your vision to life. I’m always open to learning and adapting to ensure high-quality results.' },
+                    { name: 'Get in Touch', value: `Feel free to reach out in the <#${devChannelId}> channel or send a direct message to <@723555757638942853>. Alternatively, you can contact me by email at antterzn.dev@gmail.com. Let's create something amazing together!` },
+                    { name: 'My Website', value: `You can check  [**the product page of my website ANTTERZN DEV**](https://dev.antterzn.fr/products.html) to know what I sell or [**me.antterzn.fr**](https://me.antterzn.fr) to learn more about me` }
+                    
                 )
-                .setThumbnail('https://drive.google.com/file/d/1AFRDewjHspokJ_1p_4_XnemXZ3o_tFyt/view?usp=sharing');
+                .setThumbnail('https://pics.paypal.com/00/s/MTMxNlgxNzUzWFBORw/p/OWNiMjZiYzItNDI3Zi00OTcyLTg1OTgtNDUwM2FhOWJkNDE1/image_58.jpg');
 
-            try {
-                const channel = await client.channels.fetch(devChannelId);
-                if (channel) {
-                    await channel.send({ embeds: [embed] });
-                } else {
-                    console.error('Channel not found');
-                }
-            } catch (error) {
-                console.error('Error fetching the channel:', error);
-            }
+            await interaction.channel.send({ embeds: [embed] });
+
+            await interaction.deferReply({ ephemeral: true });
+            await interaction.deleteReply();
         }
     }
 });

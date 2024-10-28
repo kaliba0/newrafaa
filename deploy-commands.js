@@ -14,6 +14,11 @@ const commands = [
         default_member_permissions: `0`,
     },
     {
+        name: 'dev',
+        description: 'Open the dev embed',
+        default_member_permissions: `0`,
+    },
+    {
         name: 'tos',
         description: 'Show the Terms Of Sales',
         default_member_permissions: `0`,
