@@ -1,6 +1,5 @@
 const { ModalBuilder, TextInputBuilder, ActionRowBuilder, TextInputStyle, EmbedBuilder, ChannelType, PermissionsBitField } = require('discord.js');
 const { startInactivityTimer } = require('./inactiveTicketManager');
-const { logTicket } = require('./logTicket.js');
 const ticketscatId = process.env.TICKETS_CAT_ID;
 const adminRoleId = process.env.ADMIN_ROLE_ID;
 const boosterRoleId = process.env.BOOSTER_ROLE_ID;
@@ -36,20 +35,7 @@ async function Sell_fx(interaction) {
             const trophyNumber = parseInt(modalInteraction.fields.getTextInputValue('trophies-input'), 10);
             const notes = modalInteraction.fields.getTextInputValue('notes-input') || 'No additional notes';
 
-            const ticketData = {
-                author: {
-                    discord_id: interaction.user.id,
-                    username: interaction.user.username
-                },
-                service: 'Sell an account',
-                details: {
-                    trophies: trophyNumber,
-                    notes: notes
-                },
-                date: new Date().toLocaleString()
-            };
             
-            logTicket(ticketData);
             
 
             const guild = interaction.guild;

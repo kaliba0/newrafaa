@@ -1,6 +1,5 @@
 const { ModalBuilder, TextInputBuilder, ActionRowBuilder, TextInputStyle, EmbedBuilder, ChannelType, PermissionsBitField } = require('discord.js');
 const { startInactivityTimer } = require('./inactiveTicketManager');
-const { logTicket } = require('./logTicket.js');
 const ticketscatId = process.env.TICKETS_CAT_ID;
 const adminRoleId = process.env.ADMIN_ROLE_ID;
 const boosterRoleId = process.env.BOOSTER_ROLE_ID;
@@ -27,18 +26,6 @@ async function Buy_fx(interaction) {
             if (!modalInteraction.isModalSubmit() || modalInteraction.customId !== 'buy-modal') return;
 
             const notes = modalInteraction.fields.getTextInputValue('notes-input') || 'No additional notes';
-
-            const ticketData = {
-                author: {
-                    discord_id: interaction.user.id,
-                    username: interaction.user.username
-                },
-                service: 'Buy an account',
-                details: {
-                    notes: notes
-                },
-                date: new Date().toLocaleString()
-            };
             
 
             const guild = interaction.guild;

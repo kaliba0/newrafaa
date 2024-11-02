@@ -1,6 +1,5 @@
 const { ModalBuilder, TextInputBuilder, ActionRowBuilder, TextInputStyle, EmbedBuilder, ChannelType, PermissionsBitField } = require('discord.js');
 const { startInactivityTimer } = require('./inactiveTicketManager');
-const { logTicket } = require('./logTicket.js');
 const ticketscatId = process.env.TICKETS_CAT_ID;
 const adminRoleId = process.env.ADMIN_ROLE_ID;
 const boosterRoleId = process.env.BOOSTER_ROLE_ID;
@@ -50,36 +49,6 @@ async function Rank30_fx(interaction) {
             const actualTrophy = parseInt(modalInteraction.fields.getTextInputValue('actual_rank-input'), 10);
             const powerLevel = parseInt(modalInteraction.fields.getTextInputValue('power-level-input'), 10);
             const notes = modalInteraction.fields.getTextInputValue('notes-input') || 'No additional notes';
-
-            let finalPrice;
-            const finalTrophies = 1000;
-            const trophiesIncrease = finalTrophies - actualTrophy;
-
-            if (actualTrophy >= 750 && actualTrophy <= 850) {
-                finalPrice = 18;
-            } else if (actualTrophy < 750) {
-                finalPrice = (trophiesIncrease / 100) * 8;
-            } else if (actualTrophy > 850) {
-                finalPrice = (trophiesIncrease / 100) * 10;
-            }
-
-            const ticketData = {
-                author: {
-                    discord_id: interaction.user.id,
-                    username: interaction.user.username
-                },
-                service: 'Boost to rank 30',
-                details: {
-                    brawler: brawlerName,
-                    trophies: actualTrophy,
-                    powerLevel: powerLevel,
-                    notes: notes,
-                    price: finalPrice
-                },
-                date: new Date().toLocaleString()
-            };
-            
-            logTicket(ticketData);
             
 
             const guild = interaction.guild;
@@ -128,7 +97,7 @@ async function Rank30_fx(interaction) {
                     { name: 'Power', value: powerLevel.toString(), inline: true },
                     { name: 'Notes', value: notes, inline: true },
                     { name: 'Service', value: 'Boost to rank 30', inline: true },
-                    { name: 'Estimated Price :', value: `**${finalPrice}€**`, inline:true},
+                    { name: 'Estimated Price :', value: `**To define**`, inline:true},
                 )
                 .setFooter({ 
                     text: `Ticket opened by ${interaction.user.username} on ${new Date().toLocaleString()}` 
@@ -140,7 +109,7 @@ async function Rank30_fx(interaction) {
                 .setColor(0x0A9EE9)
                 .setTitle('Thank you very much for your order !')
                 .addFields(
-                    {name: 'How to pay ?', value:`Please send the needed amount (**${finalPrice}€**) with Paypal to this email adress: **contactrafbs@gmail.com**.`},
+                    {name: 'How to pay ?', value:`Please send the needed amount (**To define**) with Paypal to this email adress: **contactrafbs@gmail.com**.`},
                     {name: 'A booster will handle your request very soon', value: '\u200B', inline: false},
                     {name: '\u200B', value: 'Thanks again for trusting us 🧡'},
                 )

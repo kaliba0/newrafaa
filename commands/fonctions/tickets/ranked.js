@@ -1,6 +1,5 @@
 const { ModalBuilder, TextInputBuilder, ActionRowBuilder, TextInputStyle, EmbedBuilder, ChannelType, PermissionsBitField } = require('discord.js');
 const { startInactivityTimer } = require('./inactiveTicketManager');
-const { logTicket } = require('./logTicket.js');
 const ticketscatId = process.env.TICKETS_CAT_ID;
 const adminRoleId = process.env.ADMIN_ROLE_ID;
 const boosterRoleId = process.env.BOOSTER_ROLE_ID;
@@ -63,12 +62,7 @@ async function Ranked_fx(interaction) {
             });
             return;
         };
-
-        if ((actualRanked === '1' || actualRanked === '2' || actualRanked === '3' || actualRanked === '4') && newRanked === '7') {
-            price = 35;
-        } else {
-            price = 10 * (newRanked - actualRanked);
-        }      
+    
 
         // Utilisation correcte des conditions if/else if pour les rangs
         if (actualRanked === '1') {
@@ -103,22 +97,6 @@ async function Ranked_fx(interaction) {
             newRankedName = 'Master';
         }
 
-
-        const ticketData = {
-            author: {
-                discord_id: interaction.user.id,
-                username: interaction.user.username
-            },
-            service: 'Ranked Boost',
-            details: {
-                actualRank: actualRanked,
-                wantedRank: newRanked,
-                notes: notes
-            },
-            date: new Date().toLocaleString()
-        };
-        
-        logTicket(ticketData);
         
 
         const guild = interaction.guild;
@@ -166,7 +144,7 @@ async function Ranked_fx(interaction) {
                 { name: 'New Rank', value: newRankedName, inline: true },
                 { name: 'Notes', value: notes, inline: true },
                 { name: 'Service', value: 'Ranked Boost', inline: true },
-                { name: 'Estimated Price :', value: `**${price}€**`, inline:true},
+                { name: 'Estimated Price :', value: `**To define**`, inline:true},
             )
             .setFooter({ 
                 text: `Ticket opened by ${interaction.user.username} on ${new Date().toLocaleString()}` 
