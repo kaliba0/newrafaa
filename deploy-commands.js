@@ -14,6 +14,26 @@ const commands = [
         default_member_permissions: `0`,
     },
     {
+        name: 'hacker',
+        description: 'Create the hacker embed',
+        default_member_permissions: `0`,
+    },
+    {
+        name: 'server-boosts',
+        description: 'Create the server boost embed',
+        default_member_permissions: `0`,
+    },
+    {
+        name: 'rank-up',
+        description: 'Create the rank-up embed',
+        default_member_permissions: `0`,
+    },
+    {
+        name: 'nitro-boosts',
+        description: 'Create the nitro boost embed',
+        default_member_permissions: `0`,
+    },
+    {
         name: 'dev',
         description: 'Open the dev embed',
         default_member_permissions: `0`,

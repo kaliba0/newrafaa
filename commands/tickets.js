@@ -48,7 +48,6 @@ client.on('interactionCreate', async interaction => {
                     '• **We are the fastest service ever**\n\n'
                 )
                 
-                .setThumbnail('https://logos-world.net/wp-content/uploads/2021/08/Brawl-Stars-Emblem.png')
                 .setFooter({ text: 'Φ Official Brawl’s Store Service Server Φ' });
         
 
