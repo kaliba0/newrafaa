@@ -76,12 +76,12 @@ async function Hacker(interaction) {
             .addFields(
                 { name: 'Service Description', value: serviceDescription }
             )
-            .setFooter({ 
-                text: `|  Ticket opened by ${interaction.user.username} on ${new Date().toLocaleString()}`, 
-                iconURL: 'https://cdn.discordapp.com/attachments/1267140283611611258/1307098808903012444/placeholder.jpg' 
+            .setFooter({
+                text: `|  Ticket opened by ${interaction.user.username} on ${new Date().toLocaleString()}`,
+                iconURL: 'https://cdn.discordapp.com/attachments/1267140283611611258/1307098808903012444/113E567F-E6B5-4E1B-BD7B-B974E9F339D2.jpg?ex=67391220&is=6737c0a0&hm=3402606aa1f6bdf7a1fce5d9cfc3aae0ed179fc43d935aabd530d5afe91803fb&',
             })
-            .setThumbnail('https://cdn.discordapp.com/attachments/1267140283611611258/1307098808903012444/placeholder.jpg');
-
+            .setThumbnail('https://cdn.discordapp.com/attachments/1267140283611611258/1307098808903012444/113E567F-E6B5-4E1B-BD7B-B974E9F339D2.jpg?ex=67391220&is=6737c0a0&hm=3402606aa1f6bdf7a1fce5d9cfc3aae0ed179fc43d935aabd530d5afe91803fb&');
+    
         // Send the embed in the ticket channel
         await ticketChannel.send({ content: `<@&${adminRoleId}> <@${interaction.user.id}>`, embeds: [recapEmbed] });
 
