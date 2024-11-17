@@ -14,6 +14,11 @@ const commands = [
         default_member_permissions: `0`,
     },
     {
+        name: 'test',
+        description: 'Create a new ticket',
+        default_member_permissions: `0`,
+    },
+    {
         name: 'hacker',
         description: 'Create the hacker embed',
         default_member_permissions: `0`,

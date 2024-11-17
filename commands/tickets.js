@@ -34,50 +34,77 @@ client.once('ready', () => {
 
 client.on('interactionCreate', async interaction => {
     if (interaction.isCommand()) {
-        if (interaction.commandName === 'tickets') {
+        if (interaction.commandName === 'test') {
             if (!interaction.member.roles.cache.has(adminRoleId)) {
                 await interaction.reply({ content: 'You do not have the required permissions to use this command.', ephemeral: true });
                 return;
             }
 
             const embed = new EmbedBuilder()
-                .setColor(0xFF0000)
-                .setTitle('Interested in our services?\n\n' +
-                    '• **Rank 35/30**  ' + '<:rank30:1272313243679068255> <:rank35:1300477184527564872>' + '\n' +
-                    '• **Ranked Ranks**  <:masters:1272485623009382480>\n' +
-                    '• **We are the fastest service ever**\n\n'
-                )
+                .setColor('#f300ff')
+                .setTitle(`Rafaaa's Shop 🛍` + `\n\u200B`)
+                .addFields(
+                    {name: `**TICKETS <a:diams:1307450379339829401>**`, value: `**<a:tick3t:1307097309841985548> Open a Buy Ticket to Purchase a Product.\n<a:bots:1307451427848851536> Open a Support ticket if you require Support by our Staff Team.\n\u200B**`, inline: false},
+                    {name: `**SOCIAL BOOSTS <a:diams:1307450379339829401>**`, value: `**<:tt:1307451521067126784> TikTok\n<:insta:1307451889729933424> Instagram\n\u200B**`, inline: false},
+                    { name: `**BRAWLSTARS <a:diams:1307450379339829401>**`, value: `**<:r35:1307121920851836948> Tier Max\n<:MASTER:1275475265484488754> Ranked Ranks\n\u200B**`, inline:false},
+                    {name: `**H4CK3R/DEVELOPPER <a:diams:1307450379339829401>**`, value: `**<:hacker:1307420194343227412> h4ck a social media account or anything else\n:computer: Create a bot/app/programm\n:prohibited: Ban any BrawlStars account**`, inline: false},
+                    {name:`\u200B`, value:`**<:infini:1307097682178740234> We are the fastest service ever\n<:infini:1307097682178740234> If you Product is not on Stock, your Ticket will be closed**`}
+                )              
+                .setFooter({ text: '|  Rafaaa & Antterzn', iconURL: 'https://cdn.discordapp.com/attachments/1267140283611611258/1307098808903012444/113E567F-E6B5-4E1B-BD7B-B974E9F339D2.jpg?ex=67391220&is=6737c0a0&hm=3402606aa1f6bdf7a1fce5d9cfc3aae0ed179fc43d935aabd530d5afe91803fb&' })
                 
-                .setFooter({ text: 'Φ Official Brawl’s Store Service Server Φ' });
-        
 
             const selectMenu = new StringSelectMenuBuilder()
                 .setCustomId('select-service')
                 .setPlaceholder('Select an option')
                 .addOptions([
                     {
-                        label: 'Rank 30',
-                        value: 'rank30',
-                        emoji: '1275072757792510034',
+                        label: 'Buy Ticket',
+                        value: 'ticket',
+                        emoji: '<a:tick3t:1307097309841985548>',
                     },
                     {
-                        label: 'Rank 35',
-                        value: 'rank35',
-                        emoji: '1275072588934283345',
+                        label: 'Contact Support',
+                        value: 'support',
+                        emoji: '<a:bots:1307451427848851536>',
                     },
                     {
-                        label: 'Ranked',
-                        emoji: '1275072840999112776',
-                        value: 'ranked',
+                        label: 'TikTok',
+                        emoji: '<:tt:1307451521067126784>',
+                        value: 'tiktok',
+                    },
+                    {
+                        label: 'Instagram',
+                        emoji: '<:insta:1307451889729933424>',
+                        value: 'insta',
+                    },
+                    {
+                        label: 'H4CK3R/DEV',
+                        emoji: '<:hacker:1307420194343227412>',
+                        value: 'dev'
+                    },
+                    {
+                        label: 'Ban a BS account',
+                        emoji: '🚫',
+                        value: 'ban',
+                    },
+                    {
+                        label: 'Tier Max',
+                        emoji: '<:r35:1307121920851836948>',
+                        value: 'tiermax'
+                    },
+                    {
+                        label: 'Ranked Ranks',
+                        emoji: '<:MASTER:1275475265484488754>',
+                        value: 'ranked'
                     },
                     {
                         label: 'Buy an Account',
-                        emoji: '⬅️',
+                        emoji: '<a:p4ypal:1305313685949907084>',
                         value: 'buy',
                     },
                     {
                         label: 'Sell an Account',
-                        emoji: '➡️',
+                        emoji: '<a:p4ypal:1305313685949907084>',
                         value: 'sell'
                     }
                 ]);
