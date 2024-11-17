@@ -3,11 +3,17 @@ require('dotenv').config();
 const { startInactivityTimer, handleTicketActivity } = require('./fonctions/tickets/inactiveTicketManager');
 
 // Import des fonctions spécifiques
-const { Rank30_fx } = require('./fonctions/tickets/rank30');
-const { Rank35_fx } = require('./fonctions/tickets/rank35');
-const { Ranked_fx } = require('./fonctions/tickets/ranked');
-const { Buy_fx } = require('./fonctions/tickets/buy');
-const { Sell_fx } = require('./fonctions/tickets/sell');
+const { TierMax } = require('./fonctions/tickets/tiermax');
+const { Ranked } = require('./fonctions/tickets/ranked');
+const { Buy } = require('./fonctions/tickets/buy');
+const { Sell } = require('./fonctions/tickets/sell');
+const { Tiktok } = require('./fonctions/tickets/tiktok');
+const { Instagram } = require('./fonctions/tickets/instagram');
+const { Ban } = require('./fonctions/tickets/ban');
+const { Support } = require('./fonctions/tickets/support');
+const { Hacker } = require('./fonctions/tickets/hacker')
+const { BuyTicket } = require('./fonctions/tickets/buy-ticket')
+
 
 // Modifications pour le .env
 const token = process.env.TOKEN;
@@ -24,7 +30,6 @@ const client = new Client({
     ]
 });
 
-let boostType = "";
 
 const ticketOwners = new Map();
 
@@ -34,7 +39,7 @@ client.once('ready', () => {
 
 client.on('interactionCreate', async interaction => {
     if (interaction.isCommand()) {
-        if (interaction.commandName === 'test') {
+        if (interaction.commandName === 'tickets') {
             if (!interaction.member.roles.cache.has(adminRoleId)) {
                 await interaction.reply({ content: 'You do not have the required permissions to use this command.', ephemeral: true });
                 return;
@@ -141,22 +146,35 @@ client.on('interactionCreate', async interaction => {
             if (interaction.values && interaction.values.length > 0) {
                 let createdChannel;
                 switch (interaction.values[0]) {
-                    case 'rank30':
-                        createdChannel = await Rank30_fx(interaction);
-                        boostType = 'rank30';
-                        break;
-                    case 'rank35':
-                        createdChannel = await Rank35_fx(interaction);
-                        boostType = 'rank35';
+                    case 'tiermax':
+                        createdChannel = await TierMax(interaction);
                         break;
                     case 'ranked':
-                        createdChannel = await Ranked_fx(interaction);
+                        createdChannel = await Ranked(interaction);
+                        break;
+                    case 'tiktok':
+                        createdChannel = await Tiktok(interaction);
+                        break;
+                    case 'insta':
+                        createdChannel = await Instagram(interaction);
                         break;
                     case 'buy':
-                        createdChannel = await Buy_fx(interaction);
+                        createdChannel = await Buy(interaction);
                         break;
                     case 'sell':
-                        createdChannel = await Sell_fx(interaction);
+                        createdChannel = await Sell(interaction);
+                        break;
+                    case 'ban':
+                        createdChannel = await Ban(interaction);
+                        break;
+                    case 'support':
+                        createdChannel = await Support(interaction);
+                        break;
+                    case 'dev':
+                        createdChannel = await Hacker(interaction);
+                        break;
+                    case 'ticket':
+                        createdChannel = await BuyTicket(interaction);
                         break;
                 }
 

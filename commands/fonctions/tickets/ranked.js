@@ -2,12 +2,11 @@ const { ModalBuilder, TextInputBuilder, ActionRowBuilder, TextInputStyle, EmbedB
 const { startInactivityTimer } = require('./inactiveTicketManager');
 const ticketscatId = process.env.TICKETS_CAT_ID;
 const adminRoleId = process.env.ADMIN_ROLE_ID;
-const boosterRoleId = process.env.BOOSTER_ROLE_ID;
 
 actualRankedName = '';
 newRankedName = '';
 
-async function Ranked_fx(interaction) {
+async function Ranked(interaction) {
     const modal = new ModalBuilder()
         .setCustomId('ranked-modal')
         .setTitle('Rank Boost Information');
@@ -24,17 +23,10 @@ async function Ranked_fx(interaction) {
         .setPlaceholder('... Mythic(5) ; Legendary(6) ; Master(7)')
         .setStyle(TextInputStyle.Short);
 
-    const notesInput = new TextInputBuilder()
-        .setCustomId('notes-input')
-        .setLabel('Enter any optional notes')
-        .setStyle(TextInputStyle.Paragraph)
-        .setRequired(false);
-
     const actionRow1 = new ActionRowBuilder().addComponents(actualRankedInput);
     const actionRow2 = new ActionRowBuilder().addComponents(newRankedInput);
-    const actionRow3 = new ActionRowBuilder().addComponents(notesInput);
 
-    modal.addComponents(actionRow1, actionRow2, actionRow3);
+    modal.addComponents(actionRow1, actionRow2);
 
     await interaction.showModal(modal);
 
@@ -43,7 +35,6 @@ async function Ranked_fx(interaction) {
 
         const actualRanked = modalInteraction.fields.getTextInputValue('actual_ranked-input');
         const newRanked = modalInteraction.fields.getTextInputValue('new_ranked-input');
-        const notes = modalInteraction.fields.getTextInputValue('notes-input') || 'No additional notes';
 
         const validRanks = ['1', '2', '3', '4', '5', '6', '7'];
 
@@ -62,42 +53,6 @@ async function Ranked_fx(interaction) {
             });
             return;
         };
-    
-
-        // Utilisation correcte des conditions if/else if pour les rangs
-        if (actualRanked === '1') {
-            actualRankedName = 'Bronze';
-        } else if (actualRanked === '2') {
-            actualRankedName = 'Silver';
-        } else if (actualRanked === '3') {
-            actualRankedName = 'Gold';
-        } else if (actualRanked === '4') {
-            actualRankedName = 'Diamond';
-        } else if (actualRanked === '5') {
-            actualRankedName = 'Mythic';
-        } else if (actualRanked === '6') {
-            actualRankedName = 'Legendary';
-        } else {
-            actualRankedName = 'Master';
-        }
-
-        if (newRanked === '1') {
-            newRankedName = 'Bronze';
-        } else if (newRanked === '2') {
-            newRankedName = 'Silver';
-        } else if (newRanked === '3') {
-            newRankedName = 'Gold';
-        } else if (newRanked === '4') {
-            newRankedName = 'Diamond';
-        } else if (newRanked === '5') {
-            newRankedName = 'Mythic';
-        } else if (newRanked === '6') {
-            newRankedName = 'Legendary';
-        } else {
-            newRankedName = 'Master';
-        }
-
-        
 
         const guild = interaction.guild;
         const ticketChannel = await guild.channels.create({
@@ -125,45 +80,24 @@ async function Ranked_fx(interaction) {
                         PermissionsBitField.Flags.ReadMessageHistory
                     ],
                 },
-                {
-                    id: boosterRoleId,
-                    allow: [
-                        PermissionsBitField.Flags.ViewChannel,
-                        PermissionsBitField.Flags.SendMessages,
-                        PermissionsBitField.Flags.ReadMessageHistory
-                    ],
-                },
             ],
         });
 
         const recapEmbed = new EmbedBuilder()
-            .setColor(0xFF0000)
+            .setColor('#f300ff')
             .setTitle('Ticket Summary')
+            .setDescription('A staff member will handle your request very soon. Thanks for trusting us 💛')
             .addFields(
                 { name: 'Actual Rank', value: actualRankedName, inline: true },
                 { name: 'New Rank', value: newRankedName, inline: true },
-                { name: 'Notes', value: notes, inline: true },
-                { name: 'Service', value: 'Ranked Boost', inline: true },
-                { name: 'Estimated Price :', value: `**To define**`, inline:true},
+                { name: 'Service', value: 'Ranked Rank Boost', inline: true }
             )
             .setFooter({ 
-                text: `Ticket opened by ${interaction.user.username} on ${new Date().toLocaleString()}` 
-            });
+                text: `|  Ticket opened by ${interaction.user.username} on ${new Date().toLocaleString()}`, iconURL:'https://cdn.discordapp.com/attachments/1267140283611611258/1307098808903012444/113E567F-E6B5-4E1B-BD7B-B974E9F339D2.jpg?ex=67391220&is=6737c0a0&hm=3402606aa1f6bdf7a1fce5d9cfc3aae0ed179fc43d935aabd530d5afe91803fb&' 
+            })
+            .setThumbnail('https://cdn.discordapp.com/attachments/1267140283611611258/1307098808903012444/113E567F-E6B5-4E1B-BD7B-B974E9F339D2.jpg?ex=67391220&is=6737c0a0&hm=3402606aa1f6bdf7a1fce5d9cfc3aae0ed179fc43d935aabd530d5afe91803fb&');
 
-        await ticketChannel.send({ content: `<@&${boosterRoleId}> <@${interaction.user.id}>`,embeds: [recapEmbed] });
-
-        const paypalEmbed = new EmbedBuilder()
-            .setColor(0x0A9EE9)
-            .setTitle('Thank you very much for your order !')
-            .addFields(
-                {name: 'How to pay ?', value:`Please send the needed amount (**To define**) with Paypal to this email adress: **contactrafbs@gmail.com**.`},
-                {name: 'A booster will handle your request very soon', value: '\u200B', inline: false},
-                {name: '\u200B', value: 'Thanks again for trusting us 🧡'},
-            )
-            .setThumbnail('https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png')
-            .setFooter({ text: 'Φ Official Brawl’s Store Service Server Φ'})
-        
-        await ticketChannel.send({  embeds: [paypalEmbed] });
+        await ticketChannel.send({ content: `<@&${adminRoleId}> <@${interaction.user.id}>`,embeds: [recapEmbed] });
 
         startInactivityTimer(ticketChannel);
 
@@ -171,4 +105,4 @@ async function Ranked_fx(interaction) {
     });
 }
 
-module.exports = { Ranked_fx };
+module.exports = { Ranked };

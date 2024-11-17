@@ -1,103 +1,66 @@
-const { ModalBuilder, TextInputBuilder, ActionRowBuilder, TextInputStyle, EmbedBuilder, ChannelType, PermissionsBitField } = require('discord.js');
+const { EmbedBuilder, ChannelType, PermissionsBitField } = require('discord.js');
 const { startInactivityTimer } = require('./inactiveTicketManager');
 const ticketscatId = process.env.TICKETS_CAT_ID;
 const adminRoleId = process.env.ADMIN_ROLE_ID;
-const boosterRoleId = process.env.BOOSTER_ROLE_ID;
 
-async function Buy_fx(interaction) {
-    const modal = new ModalBuilder()
-        .setCustomId('buy-modal')
-        .setTitle('Buy an account');
+async function Buy(interaction) {
+    const guild = interaction.guild;
 
-    const notesInput = new TextInputBuilder()
-        .setCustomId('notes-input')
-        .setLabel('Describe the account you want')
-        .setStyle(TextInputStyle.Paragraph)
-        .setRequired(false);
-
-    const actionRow2 = new ActionRowBuilder().addComponents(notesInput);
-
-    modal.addComponents(actionRow2);
-
-    await interaction.showModal(modal);
-
-    return new Promise((resolve) => {
-        interaction.client.once('interactionCreate', async modalInteraction => {
-            if (!modalInteraction.isModalSubmit() || modalInteraction.customId !== 'buy-modal') return;
-
-            const notes = modalInteraction.fields.getTextInputValue('notes-input') || 'No additional notes';
-            
-
-            const guild = interaction.guild;
-            const ticketChannel = await guild.channels.create({
-                name: `ticket-${interaction.user.username}`,
-                type: ChannelType.GuildText,
-                parent: ticketscatId,
-                permissionOverwrites: [
-                    {
-                        id: guild.id,
-                        deny: [PermissionsBitField.Flags.ViewChannel],
-                    },
-                    {
-                        id: interaction.user.id,
-                        allow: [
-                            PermissionsBitField.Flags.ViewChannel,
-                            PermissionsBitField.Flags.SendMessages,
-                            PermissionsBitField.Flags.ReadMessageHistory
-                        ],
-                    },
-                    {
-                        id: adminRoleId,
-                        allow: [
-                            PermissionsBitField.Flags.ViewChannel,
-                            PermissionsBitField.Flags.SendMessages,
-                            PermissionsBitField.Flags.ReadMessageHistory
-                        ]
-                    },
-                    {
-                        id: boosterRoleId,
-                        allow: [
-                            PermissionsBitField.Flags.ViewChannel,
-                            PermissionsBitField.Flags.SendMessages,
-                            PermissionsBitField.Flags.ReadMessageHistory
-                        ],
-                    },
+    const ticketChannel = await guild.channels.create({
+        name: `ticket-${interaction.user.username}`,
+        type: ChannelType.GuildText,
+        parent: ticketscatId,
+        permissionOverwrites: [
+            {
+                id: guild.id,
+                deny: [PermissionsBitField.Flags.ViewChannel],
+            },
+            {
+                id: interaction.user.id,
+                allow: [
+                    PermissionsBitField.Flags.ViewChannel,
+                    PermissionsBitField.Flags.SendMessages,
+                    PermissionsBitField.Flags.ReadMessageHistory,
                 ],
-            });
-
-            const recapEmbed = new EmbedBuilder()
-                .setColor(0xFF0000)
-                .setTitle('Ticket Summary')
-                .addFields(
-                    { name: 'Notes', value: notes, inline: true },
-                    { name: 'Service', value: 'Buy an account', inline: true }
-                )
-                .setFooter({ 
-                    text: `Ticket opened by ${interaction.user.username} on ${new Date().toLocaleString()}` 
-                });
-
-            await ticketChannel.send({ content: `<@&${boosterRoleId}> <@${interaction.user.id}>`, embeds: [recapEmbed] });
-
-            const paypalEmbed = new EmbedBuilder()
-                .setColor(0x0A9EE9)
-                .setTitle('Thank you very much for your order !')
-                .addFields(
-                    {name: 'A booster will handle your request very soon', value: '\u200B', inline: false},
-                    {name: '\u200B', value: 'Thanks again for trusting us 🧡'},
-                )
-                .setThumbnail('https://logos-world.net/wp-content/uploads/2021/08/Brawl-Stars-Emblem.png')
-                .setFooter({ text: 'Φ Official Brawl’s Store Service Server Φ'})
+            },
+            {
+                id: adminRoleId,
+                allow: [
+                    PermissionsBitField.Flags.ViewChannel,
+                    PermissionsBitField.Flags.SendMessages,
+                    PermissionsBitField.Flags.ReadMessageHistory,
+                ],
+            },
             
-            await ticketChannel.send({ embeds: [paypalEmbed] });
-
-            
-            startInactivityTimer(ticketChannel);
-            
-            await modalInteraction.reply({ content: `A new ticket has been created for your request: <#${ticketChannel.id}>. Please follow the instructions sent in this channel. \nThank you very much for trusting us 🧡`, ephemeral: true });
-
-            resolve(ticketChannel);
-        });
+        ],
     });
+
+    const recapEmbed = new EmbedBuilder()
+        .setColor('#f300ff')
+        .setTitle('Ticket Summary')
+        .setDescription('A staff member will handle your request very soon. Thanks for trusting us 💛')
+        .addFields(
+            { name: 'Service', value: 'Buy an account', inline: true }
+        )
+        .setFooter({
+            text: `|  Ticket opened by ${interaction.user.username} on ${new Date().toLocaleString()}`,
+            iconURL: 'https://cdn.discordapp.com/attachments/1267140283611611258/1307098808903012444/113E567F-E6B5-4E1B-BD7B-B974E9F339D2.jpg?ex=67391220&is=6737c0a0&hm=3402606aa1f6bdf7a1fce5d9cfc3aae0ed179fc43d935aabd530d5afe91803fb&',
+        })
+        .setThumbnail('https://cdn.discordapp.com/attachments/1267140283611611258/1307098808903012444/113E567F-E6B5-4E1B-BD7B-B974E9F339D2.jpg?ex=67391220&is=6737c0a0&hm=3402606aa1f6bdf7a1fce5d9cfc3aae0ed179fc43d935aabd530d5afe91803fb&');
+
+    await ticketChannel.send({
+        content: `<@&${adminRoleId}> <@${interaction.user.id}>`,
+        embeds: [recapEmbed],
+    });
+
+    startInactivityTimer(ticketChannel);
+
+    await interaction.reply({
+        content: `A new ticket has been created for your request: <#${ticketChannel.id}>. Please follow the instructions sent in this channel. \nThank you very much for trusting us 🧡`,
+        ephemeral: true,
+    });
+
+    return ticketChannel;
 }
 
-module.exports = { Buy_fx };
+module.exports = { Buy };
